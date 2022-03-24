@@ -1,0 +1,18 @@
+.middle-of-page {
+    display: flex;
+    flex-direction: column;
+}
+
+.middle-of-page button {
+    margin: 5px;
+    width: 350px;
+    align-self: center;
+}
+
+.center-page {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
