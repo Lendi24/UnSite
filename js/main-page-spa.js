@@ -2,16 +2,16 @@ function EnterAuthMode(mode) {
     var elem = document.getElementById("auth-popup"); 
     switch (mode) {
         case 'login':
-            elem.hidden = false;
+            elem.classList.add("unsite-anim-show");
             break;
 
         case 'signu':
-            elem.hidden = false;
+            elem.classList.add("unsite-anim-show");
             break;
         
     
         default:
-            elem.hidden = true;
+            elem.classList.remove("unsite-anim-show");
             break;
     }
 }
