@@ -16,15 +16,34 @@ window.onload = function() {
     agreeText = document.getElementById("auth-agree-text");
     
     //input to hook
-    submButton = document.
+    primButton = document.getElementById("button-prim");
+    secButton = document.getElementById("button-sec");
+
     agreeBox = document.getElementById("auth-agree-box");
     usrnme = document.getElementById("usr-name");
     passwd = document.getElementById("paswd");   
+
+    //init stuff
+//    primButton.disabled = true;
 };
 
 function ChangedCheck(checked) {
-    console.log(checked);
-    disabled 
+    primButton.disabled = !checked;
+}
+
+function ChangeUname(val) {
+    console.log(val);
+    if (val == "<empty string>"){
+        usrnme.classList.remove("is-success");
+    }
+
+    else {
+        usrnme.classList.add("is-success");
+    }
+}
+
+function ChangePasswd(val) {
+
 }
 
 function EnterAuthMode(mode) {
@@ -36,6 +55,7 @@ function EnterAuthMode(mode) {
             agreeBox.checked = true;
             agreeBox.hidden = true;
             agreeText.hidden = true;
+            primButton.disabled = false;
             break;
 
         case 'signu':
@@ -44,10 +64,11 @@ function EnterAuthMode(mode) {
             agreeBox.checked = false;
             agreeBox.hidden = false;
             agreeText.hidden = false;
+            primButton.disabled = true;
             break;
     
         default:
             elem.classList.remove("unsite-anim-show");
-            break;
+            break; 
     }
 }

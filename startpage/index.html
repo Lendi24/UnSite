@@ -22,7 +22,7 @@
             <div class="field">
                 <label class="label">Username</label>
                     <div class="control has-icons-left has-icons-right">
-                    <input class="input is-success" type="text" placeholder="Username" id="usr-name">
+                    <input class="input is-success" type="text" placeholder="Username" oninput="ChangeUname(value)" id="usr-name">
                     <span class="icon is-small is-left">
                         <i class="mdi mdi-account"></i>
                     </span>
@@ -36,8 +36,8 @@
             <div class="field">
                 <label class="label">Password</label>
                 <div class="control has-icons-left has-icons-right">
-                    <input class="input is-danger" type="Password" placeholder="Password" id="paswd">
-                    <span class="icon is-small is-left">
+                    <input class="input is-danger" type="Password" placeholder="Password" oninput="ChangePasswd(value)" id="paswd">
+                    <span class="icon is-small is-left"> 
                         <i class="mdi mdi-lock"></i>
                     </span>
                     <span class="icon is-small is-right">
@@ -58,10 +58,10 @@
             
             <div class="field is-grouped">
                 <div class="control">
-                    <button class="button is-primary" onclick="EnterAuthMode()">Submit</button>
+                    <button class="button is-primary" onclick="EnterAuthMode()" id="button-prim">Submit</button>
                 </div>
                 <div class="control">
-                    <button class="button is-primary is-light" onclick="EnterAuthMode()">Cancel</button>
+                    <button class="button is-primary is-light" onclick="EnterAuthMode()" id="button-sec">Cancel</button>
                 </div>
             </div>
         </section>
@@ -79,8 +79,6 @@
             <button onclick="EnterAuthMode('login')" class="ml-2 button is-primary is-light">Login</button>
         </div>
     </section>
-
-
 
 </body>
 </html>
