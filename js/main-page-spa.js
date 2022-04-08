@@ -14,6 +14,10 @@ window.onload = function() {
     elem = document.getElementById("auth-popup"); 
     title = document.getElementById("auth-title"); 
     agreeText = document.getElementById("auth-agree-text");
+
+    //text to hide or unhide if feild is correct
+    userWarnText = document.getElementById("usr-warn-name");
+    paswWarnText = document.getElementById("usr-warn-psw");
     
     //input to hook
     primButton = document.getElementById("button-prim");
@@ -23,36 +27,57 @@ window.onload = function() {
     usrnme = document.getElementById("usr-name");
     passwd = document.getElementById("paswd");   
 
+    //bools to continue
+    usrAcceptedEula = false;
+    usrValidName = false;
+    usrValidPasswd = false;
+
     //init stuff
 //    primButton.disabled = true;
 };
 
+function CheckIfValid() {
+    primButton.disabled = !(usrAcceptedEula && usrValidName && usrValidPasswd);
+}
+
 function ChangedCheck(checked) {
-    primButton.disabled = !checked;
+    //primButton.disabled = !checked;
+    usrAcceptedEula = checked;
+    CheckIfValid();
 }
 
 function ChangeUname(val) {
-    if (val.replace(/\s/g, "") != ""){
+    usrValidName = val.replace(/\s/g, "") != ""
+    if (usrValidName) {
+        userWarnText.style.display = "none";
         usrnme.classList.add("is-success");
         usrnme.classList.remove("is-danger");
     }
 
     else {
+        userWarnText.style.display = "block";
         usrnme.classList.remove("is-success");
         usrnme.classList.add("is-danger");
     }
+
+    CheckIfValid();
 }
 
 function ChangePasswd(val) {
-    if (/\d/.test(val) && /[a-zA-Z]/g.test(val)){
+    usrValidPasswd = /\d/.test(val) && /[a-zA-Z]/g.test(val);
+    if (usrValidPasswd){
+        paswWarnText.style.display = "none";
         passwd.classList.add("is-success");
         passwd.classList.remove("is-danger");
     }
 
     else {
+        paswWarnText.style.display = "block";
         passwd.classList.remove("is-success");
         passwd.classList.add("is-danger");
     }
+
+    CheckIfValid();
 }
 
 function EnterAuthMode(mode) {
