@@ -32,18 +32,27 @@ function ChangedCheck(checked) {
 }
 
 function ChangeUname(val) {
-    console.log(val);
-    if (val == "<empty string>"){
-        usrnme.classList.remove("is-success");
+    if (val.replace(/\s/g, "") != ""){
+        usrnme.classList.add("is-success");
+        usrnme.classList.remove("is-danger");
     }
 
     else {
-        usrnme.classList.add("is-success");
+        usrnme.classList.remove("is-success");
+        usrnme.classList.add("is-danger");
     }
 }
 
 function ChangePasswd(val) {
+    if (/\d/.test(val) && /[a-zA-Z]/g.test(val)){
+        passwd.classList.add("is-success");
+        passwd.classList.remove("is-danger");
+    }
 
+    else {
+        passwd.classList.remove("is-success");
+        passwd.classList.add("is-danger");
+    }
 }
 
 function EnterAuthMode(mode) {
