@@ -80,16 +80,30 @@ function ChangePasswd(val) {
     CheckIfValid();
 }
 
-function EnterAuthMode(mode) {
+function ResetForm() {
+    //U-name
+    userWarnText.style.display = "none";
+    usrnme.classList.remove("is-success");
+    usrnme.classList.remove("is-danger");
+    usrnme.value = "";
 
+    //P-word
+    paswWarnText.style.display = "none";
+    passwd.classList.remove("is-success");
+    passwd.classList.remove("is-danger");
+    passwd.value = "";
+}
+
+function EnterAuthMode(mode) {
     switch (mode) {
         case 'login':
             elem.classList.add("unsite-anim-show");
-            title.innerText = "Login";
-            agreeBox.checked = true;
-            agreeBox.hidden = true;
-            agreeText.hidden = true;
+            title.innerText = "Login"; //Cheep solution! This var is also used to keep
+            agreeBox.checked = true;   //track of 'auth mode'. If you want to add auth mode,
+            agreeBox.hidden = true;    //(or edit the name), make sure to also edit it
+            agreeText.hidden = true;   //at the 'submit' case
             primButton.disabled = false;
+            usrAcceptedEula = true;
             break;
 
         case 'signu':
@@ -99,10 +113,28 @@ function EnterAuthMode(mode) {
             agreeBox.hidden = false;
             agreeText.hidden = false;
             primButton.disabled = true;
+            usrAcceptedEula = false;
+            break;
+
+        case 'submit':
+            switch (title.innerText) {
+                case "Signup":
+                    
+                    break;
+
+                case "Login":
+                    alert("Invalid username or password");
+                    break;
+    
+                default:
+                    break;
+            }
             break;
     
         default:
             elem.classList.remove("unsite-anim-show");
             break; 
     }
+
+    ResetForm();
 }
