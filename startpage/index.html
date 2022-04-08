@@ -22,7 +22,7 @@
             <div class="field">
                 <label class="label">Username</label>
                     <div class="control has-icons-left has-icons-right">
-                    <input class="input is-danger" type="text" placeholder="Username" oninput="ChangeUname(value)" id="usr-name">
+                    <input class="input" type="Username" placeholder="Username" oninput="ChangeUname(value)" id="usr-name">
                     <span class="icon is-small is-left">
                         <i class="mdi mdi-account"></i>
                     </span>
@@ -30,13 +30,13 @@
                         <i class="fas fa-check"></i>
                     </span>
                 </div>
-                <p class="help is-danger" id="usr-warn-name">This username is not valid</p>
+                <p class="help is-danger" id="usr-warn-name" style="display: none;">This username is not valid</p>
             </div>
               
             <div class="field">
                 <label class="label">Password</label>
                 <div class="control has-icons-left has-icons-right">
-                    <input class="input is-danger" type="Password" placeholder="Password" oninput="ChangePasswd(value)" id="paswd">
+                    <input class="input" type="Password" placeholder="Password" oninput="ChangePasswd(value)" id="paswd">
                     <span class="icon is-small is-left"> 
                         <i class="mdi mdi-lock"></i>
                     </span>
@@ -44,7 +44,7 @@
                         <i class="fas fa-exclamation-triangle"></i>
                     </span>
                 </div>
-                <p class="help is-danger" id="usr-warn-psw">Password must contain minimum of one letter and one number</p>
+                <p class="help is-danger" id="usr-warn-psw" style="display: none;">Password must contain minimum of one letter and one number</p>
             </div>
               
             <div class="field">
