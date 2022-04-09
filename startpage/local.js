@@ -82,16 +82,21 @@ function ChangePasswd(val) {
 
 function ResetForm() {
     //U-name
+    usrValidName = false;
     userWarnText.style.display = "none";
     usrnme.classList.remove("is-success");
     usrnme.classList.remove("is-danger");
     usrnme.value = "";
 
     //P-word
+    usrValidPasswd = false;
     paswWarnText.style.display = "none";
     passwd.classList.remove("is-success");
     passwd.classList.remove("is-danger");
     passwd.value = "";
+
+    //Updates Button
+    CheckIfValid();
 }
 
 function EnterAuthMode(mode) {
@@ -119,7 +124,7 @@ function EnterAuthMode(mode) {
         case 'submit':
             switch (title.innerText) {
                 case "Signup":
-                    
+                    window.location.href = '/verification/1-8215'
                     break;
 
                 case "Login":
