@@ -1,0 +1,9 @@
+html, body {
+    user-select: none;
+    scroll-behavior: smooth;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+
+    height: 100%;
+    width: 100%;
+}

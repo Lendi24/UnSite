@@ -1,0 +1,16 @@
+.unsite-popup {
+    position: fixed;
+    width: 80%;
+    height: 0%;
+    margin-left: 10%;
+    overflow-y: scroll;
+    background-color: #eee;
+    z-index: 10;
+
+    transition: height 0.5s linear;
+}
+
+.unsite-anim-show {
+    visibility: visible;
+    height: 100%;
+}
