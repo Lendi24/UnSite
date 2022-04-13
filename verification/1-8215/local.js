@@ -7,11 +7,11 @@ window.onload = function() {
     button = box.getElementsByClassName("is-checkbox")[0];
     CenterElm(box);
 
-    box.onmouseover = function() {
+    box.onmouseenter = function() {
         if (!done) {
+            RandomPos(box);
             setTimeout(() => {  
-                RandomPos(box);
-            }, 50);
+            }, 10);
     
         }
     }
