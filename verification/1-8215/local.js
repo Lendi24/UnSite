@@ -1,14 +1,23 @@
-var box, button, done;
+var box, button, done, hint;
+var triesBeforeHint = 10;
 
 window.onload = function() { 
     done = false;
-    document.body.style.backgroundColor = "gray";
     box = document.getElementById("box");
     button = box.getElementsByClassName("is-checkbox")[0];
+    hint = document.getElementById("hint-text");
     CenterElm(box);
 
     box.onmouseenter = function() {
         if (!done) {
+            if (triesBeforeHint > 0) {
+                triesBeforeHint--;
+            }
+
+            else if (triesBeforeHint == 0) {
+                hint.innerHTML = "<br>Psst!<br>Have you tried resizing the window?";
+            }
+            
             RandomPos(box);
             setTimeout(() => {  
             }, 10);
