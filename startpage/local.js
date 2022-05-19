@@ -33,7 +33,7 @@ window.onload = function() {
     usrValidPasswd = false;
 
     //init stuff
-//    primButton.disabled = true;
+    alert("troll");
 };
 
 function CheckIfValid() {
