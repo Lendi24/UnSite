@@ -1,7 +1,7 @@
 const rootElement = document.getElementById("spa-root");
 const routerLoggingPrefix = "[SPA-Router]: 👉️ ";
 const routes = {
-    "#/":                               { title: "UnSite - Welcome!",       html: "/html/home.html",         func: null },
+    "#/":                               { title: "UnSite - Welcome!",       html: "/html/auth/auth.html",         func: null },
     "#/verification":                   { title: "UnSite - Verification",   html: "",         func: null },
 };
 
@@ -9,6 +9,11 @@ const routes = {
 let routeActive = {key: "#/", value: "#"};
 let ignoreNextCall = 0;
 
+function requestError() {
+    return (
+        "<h1>Error 404!</h1>"
+    );
+}
 
 async function requestPage(path) {
     return new Promise(function(sendPromisedPage) {
@@ -20,7 +25,7 @@ async function requestPage(path) {
             else {
                 console.log(routerLoggingPrefix+"(🔴) Could not find requested page on server \""+window.location.hash.slice(1)+"\"" + " on server or cache"); 
                 routeActive  = {key: "#/", value: "#"};
-                sendPromisedPage("<h1>Error 404!</h1>");
+                sendPromisedPage(requestError);
             }
         };
     
@@ -38,11 +43,11 @@ async function router(routeNewObject) {
             routeActive = {key: window.location.hash, value: routeNewObject};
             document.title = routeNewObject.title;            
 
-            //console.log(route);
-            applyPage( await requestPage(routeNewObject.html));        
+            await requestPage(routeNewObject.html).then( function(value) {applyPage(value)})     
             console.log(routerLoggingPrefix+"(⚪) Requested page \""+window.location.hash.slice(1)+"\"");
     } else {
         console.log(routerLoggingPrefix+"(🔴) Could not find requested page \""+window.location.hash.slice(1)+"\""+ " in routes"); 
+        applyPage(requestError());
         ignoreNextCall = 0;        
     }
 }
