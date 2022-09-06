@@ -11,20 +11,22 @@ let ignoreNextCall = 0;
 
 
 async function requestPage(path) {
-    let xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
-        if (this.readyState === 4 && this.status === 200) {
-            return this.responseText;
-        }
-    };
-
-    xhttp.open('GET', path, true);
-    xhttp.onerror = function () { 
-        console.log(routerLoggingPrefix+"(🔴) Could not find requested page on server \""+window.location.hash.slice(1)+"\"" + " on server or cache"); 
-        routeActive  = {key: "#/", value: "#"};
-        return "<h1>Error 404!</h1>";
-    };
-    xhttp.send();
+    return new Promise(function(sendPromisedPage) {
+        let xhttp = new XMLHttpRequest();
+        xhttp.onload/*onreadystatechange*/ = function () {
+            if (/*this.readyState === 4 &&*/ xhttp.status === 200) {
+                sendPromisedPage(this.responseText);
+            }
+            else {
+                console.log(routerLoggingPrefix+"(🔴) Could not find requested page on server \""+window.location.hash.slice(1)+"\"" + " on server or cache"); 
+                routeActive  = {key: "#/", value: "#"};
+                sendPromisedPage("<h1>Error 404!</h1>");
+            }
+        };
+    
+        xhttp.open('GET', path, true);
+        xhttp.send();    
+    });
 }
 
 function applyPage(html) {
