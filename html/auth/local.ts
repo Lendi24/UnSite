@@ -1,42 +1,26 @@
-    //Change if login or signup
-    var elem;
-    var title;
-    var agreeText;
+let elem = document.getElementById("auth-popup"); 
+let title = document.getElementById("auth-title"); 
+let agreeText = document.getElementById("auth-agree-text");
 
-    //Input to hook
-    var agreeBox;
-    var usrnme;
-    var passwd;
+//text to hide or unhide if feild is correct
+let userWarnText = document.getElementById("usr-warn-name");
+let paswWarnText = document.getElementById("usr-warn-psw");
 
-    var userWarnText, paswWarnText, primButton, secButton, usrAcceptedEula, usrValidName, usrValidPasswd
+//input to hook
+let primButton = document.getElementById("button-prim");
+let secButton = document.getElementById("button-sec");
 
+let agreeBox = document.getElementById("auth-agree-box");
+let usrnme = document.getElementById("usr-name");
+let passwd = document.getElementById("paswd");   
 
-window.onload = function() {
-    //Change if login or signup
-    elem = document.getElementById("auth-popup"); 
-    title = document.getElementById("auth-title"); 
-    agreeText = document.getElementById("auth-agree-text");
+//bools to continue
+let usrAcceptedEula = false;
+let usrValidName = false;
+let usrValidPasswd = false;
 
-    //text to hide or unhide if feild is correct
-    userWarnText = document.getElementById("usr-warn-name");
-    paswWarnText = document.getElementById("usr-warn-psw");
-    
-    //input to hook
-    primButton = document.getElementById("button-prim");
-    secButton = document.getElementById("button-sec");
-
-    agreeBox = document.getElementById("auth-agree-box");
-    usrnme = document.getElementById("usr-name");
-    passwd = document.getElementById("paswd");   
-
-    //bools to continue
-    usrAcceptedEula = false;
-    usrValidName = false;
-    usrValidPasswd = false;
-
-    //init stuff
-    //alert("troll");
-};
+//init stuff
+//alert("troll");
 
 function CheckIfValid() {
     primButton.disabled = !(usrAcceptedEula && usrValidName && usrValidPasswd);
