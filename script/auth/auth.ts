@@ -11,8 +11,6 @@ let primButton = document.getElementById("button-prim");
 let secButton = document.getElementById("button-sec");
 
 let agreeBox = document.getElementById("auth-agree-box");
-let usrnme = document.getElementById("usr-name");
-let passwd = document.getElementById("paswd");   
 
 //bools to continue
 let usrAcceptedEula = false;
@@ -32,40 +30,44 @@ function ChangedCheck(checked) {
     CheckIfValid();
 }
 
-function ChangeUname(val) {
-    if (val.replace(/\s/g, "") != "") {
+function ChangeUname(val, obj) {
+    usrValidName = val.replace(/\s/g, "") != "";
+    if (usrValidName) {
         userWarnText.style.display = "none";
-        usrnme.classList.add("is-success");
-        usrnme.classList.remove("is-danger");
+        obj.classList.add("is-success");
+        obj.classList.remove("is-danger");
     }
 
     else {
         userWarnText.style.display = "block";
-        usrnme.classList.remove("is-success");
-        usrnme.classList.add("is-danger");
+        obj.classList.remove("is-success");
+        obj.classList.add("is-danger");
     }
-
+ 
     CheckIfValid();
 }
 
-function ChangePasswd(val) {
+function ChangePasswd(val, obj) {
     usrValidPasswd = /\d/.test(val) && /[a-zA-Z]/g.test(val);
     if (usrValidPasswd){
         paswWarnText.style.display = "none";
-        passwd.classList.add("is-success");
-        passwd.classList.remove("is-danger");
+        obj.classList.add("is-success");
+        obj.classList.remove("is-danger");
     }
 
     else {
         paswWarnText.style.display = "block";
-        passwd.classList.remove("is-success");
-        passwd.classList.add("is-danger");
+        obj.classList.remove("is-success");
+        obj.classList.add("is-danger");
     }
 
     CheckIfValid();
 }
 
 function ResetForm() {
+    let usrnme = document.getElementById("usr-name");
+    let passwd = document.getElementById("paswd");   
+
     //U-name
     usrValidName = false;
     userWarnText.style.display = "none";
@@ -109,7 +111,7 @@ function EnterAuthMode(mode) {
         case 'submit':
             switch (title.innerText) {
                 case "Signup":
-                    window.location.href = '/verification/1-8215'
+                    window.location.href = '/#/verification'
                     break;
 
                 case "Login":
