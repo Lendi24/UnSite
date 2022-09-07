@@ -1,8 +1,8 @@
 const rootElement = document.getElementById("spa-root");
 const routerLoggingPrefix = "[SPA-Router]: 👉️ ";
 const routes = {
-    "#/":                               { title: "UnSite - Welcome!",       html: "/html/auth/auth.html",         func: null },
-    "#/verification":                   { title: "UnSite - Verification",   html: "",         func: null },
+    "#/":                               { title: "UnSite - Welcome!",       html: "/html/auth/auth.html",           func: null },
+    "#/verification":                   { title: "UnSite - Verification",   html: "/html/tasks/!ndex.html",         func: null },
 };
 
 
