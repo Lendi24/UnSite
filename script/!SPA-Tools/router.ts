@@ -1,8 +1,8 @@
 const rootElement = document.getElementById("spa-root");
 const routerLoggingPrefix = "[SPA-Router]: 👉️ ";
 const routes = {
-    "#/":                               { title: "UnSite - Welcome!",       html: "/html/auth/auth.html",           func: null },
-    "#/verification":                   { title: "UnSite - Verification",   html: "/html/tasks/!ndex.html",         func: null },
+    "#/":               { title: "UnSite - Welcome!",       html: "/html/auth/auth.html",       js: "/script/auth/auth.js" },
+    "#/verification":   { title: "UnSite - Verification",   html: "/html/tasks/!first.html",    js: "/script/tasks/!first.js" },
 };
 
 
@@ -38,12 +38,25 @@ function applyPage(html) {
     rootElement.innerHTML = html;
 }
 
+function linkJS(source) {
+    let script = document.createElement('script');
+    script.src = source;
+    
+    document.head.appendChild(script);    
+}
+
 async function router(routeNewObject) {
     if (routeNewObject) {
             routeActive = {key: window.location.hash, value: routeNewObject};
             document.title = routeNewObject.title;            
 
-            await requestPage(routeNewObject.html).then( function(value) {applyPage(value)})     
+            await requestPage(routeNewObject.html).then( function(value) {
+                applyPage(value);
+                if (routeNewObject.js != null) {
+                    linkJS(routeNewObject.js);
+                }
+            })    
+
             console.log(routerLoggingPrefix+"(⚪) Requested page \""+window.location.hash.slice(1)+"\"");
     } else {
         console.log(routerLoggingPrefix+"(🔴) Could not find requested page \""+window.location.hash.slice(1)+"\""+ " in routes"); 
