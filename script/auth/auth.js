@@ -5,6 +5,9 @@ class auth {
     primButtonID;
     secButtonID;
     agreeBoxID;
+    hasValidUsrname;
+    hasValidPasswd;
+    hasCheckedBox;
     //text to hide or unhide if feild is correct
     static userWarnTexID = "usr-warn-name";
     static paswWarnTexID = "usr-warn-psw";
@@ -60,6 +63,9 @@ function checkIfValid() {
     document.getElementById(auth.primButtonID).disabled = !(auth.hasValidUsrname && auth.hasValidPasswd && auth.hasCheckedBox);
 }
 function sendToValidate() {
+    auth.hasValidUsrname = false;
+    auth.hasValidPasswd = false;
+    auth.hasCheckedBox = false;
     if (auth.hasValidUsrname && auth.hasValidPasswd && auth.hasCheckedBox) {
         window.location.href = "/#/verification";
     }
