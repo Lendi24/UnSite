@@ -1,6 +1,6 @@
 'use strict';
 const tasks = {
-    0: { title: "Verification", html: "/html/tasks/not-a-robot.html", js: null },
+    0: { title: "Verification", html: "/html/tasks/Tos.html", js: null },
     1: { title: "Verification", html: "/html/tasks/not-a-robot.html", js: null },
     2: { title: "Verification", html: "/html/tasks/temp1.html", js: null },
     3: { title: "Verification", html: "/html/tasks/temp2.html", js: null },
