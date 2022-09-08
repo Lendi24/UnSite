@@ -3,8 +3,8 @@ const rootElement = document.getElementById("spa-root");
 const routerLoggingPrefix = "[SPA-Router]: 👉️ ";
 const routes = {
     "#/": { title: "UnSite - Welcome!", html: "/html/auth/auth.html", js: "/script/auth/auth.js" },
-    "#/signin": { title: "UnSite - Welcome!", html: "/html/auth/accountman.html", js: "/script/auth/auth.js" },
-    "#/signup": { title: "UnSite - Welcome!", html: "/html/auth/accountman.html", js: "/script/auth/auth.js" },
+    "#/signin": { title: "UnSite - Welcome!", html: "/html/auth/signin.html", js: "/script/auth/auth.js" },
+    "#/signup": { title: "UnSite - Welcome!", html: "/html/auth/signup.html", js: "/script/auth/auth.js" },
     "#/verification": { title: "UnSite - Verification", html: "/html/tasks/!first.html", js: "/script/tasks/!first.js" },
 };
 let routeActive = { key: "#/", value: "#" };

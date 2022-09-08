@@ -1,10 +1,10 @@
 <section class="container hero is-fullheight column is-one-third is-justify-content-center ">
-    <h1 class="title pb-4" id="auth-title"></h1>              
+    <h1 class="title pb-4">Sign-up</h1>              
       
     <div class="field">
         <label class="label">Username</label>
         <div class="control has-icons-left">
-            <input class="input" type="Username" placeholder="Username" oninput="ChangeUname(value, this)" id="usr-name">
+            <input class="input" type="Username" placeholder="Username" oninput="onUnameChange(value, this)" id="usr-name">
             <span class="icon is-small is-left">
                 <i class="mdi mdi-account"></i>
             </span>
@@ -15,7 +15,7 @@
     <div class="field">
         <label class="label">Password</label>
         <div class="control has-icons-left">
-            <input class="input" type="Password" placeholder="Password" oninput="ChangePasswd(value, this)" id="paswd">
+            <input class="input" type="Password" placeholder="Password" oninput="onPasswdChange(value, this)" id="paswd">
             <span class="icon is-small is-left"> 
                 <i class="mdi mdi-lock"></i>
             </span>
@@ -26,17 +26,16 @@
     <div class="field">
         <div class="control" id="auth-agree-text">
             <label class="checkbox">
-                <input type="checkbox" onchange="ChangedCheck(checked)" id="auth-agree-box">
+                <input type="checkbox" onchange="onAgreeboxChange(checked)" id="auth-agree-box">
                 I agree to the <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">terms and conditions</a>
             </label>
         </div>
     </div>
 
-   
     <div class="field is-grouped">
         <div class="control">
-            <a class="button is-primary" onclick="EnterAuthMode('submit')" id="button-prim">Submit</a>
-            <a class="button is-primary is-light" href="#/" id="button-sec">Cancel</a>
+            <button class="button is-primary"          onclick="sendToValidate()" id="button-prim" disabled>Login</button>
+            <a      class="button is-primary is-light" href="#/" id="button-sec">Cancel</a>
         </div>
     </div> 
 </section>

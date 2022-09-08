@@ -1,19 +1,12 @@
 'use strict';
 
 class auth {
-    elemID: string;/*
-    titleID: string;
-    agreeTextID: string;
     userWarnTexID: string;
     paswWarnTexID: string;
     primButtonID: string;
     secButtonID: string;
-    agreeBoxID: string;*/
+    agreeBoxID: string;
     
-    static elemID        =   "auth-popup";
-    static titleID       =   "auth-title";
-    static agreeTextID   =   "auth-agree-text";
-
     //text to hide or unhide if feild is correct
     static userWarnTexID =   "usr-warn-name";
     static paswWarnTexID =   "usr-warn-psw";
@@ -24,38 +17,81 @@ class auth {
     static agreeBoxID    =   "auth-agree-box";
 
     //vars
+    static hasValidUsrname = false;
+    static hasValidPasswd = false;
+    static hasCheckedBox = false;
 }
 /*
 }*/
 
 //document.getElementById(auth.titleID) 
 
-function ChangeUname(value, elem) {
+function onUnameChange(val, obj) {
+    let usrValidName = val.replace(/\s/g, "") != "";
+    if (usrValidName) {
+        document.getElementById(auth.userWarnTexID).style.display = "none";
+        obj.classList.add("is-success");
+        obj.classList.remove("is-danger");
+        auth.hasValidUsrname = true;
+    }
 
+    else {
+        document.getElementById(auth.userWarnTexID).style.display = "block";
+        obj.classList.remove("is-success");
+        obj.classList.add("is-danger");
+        auth.hasValidUsrname = false;
+    }
+ 
+    checkIfValid();
 }
 
-function ChangePasswd(value, elem) {
+function onPasswdChange(val, obj) {
+    let usrValidPasswd = /\d/.test(val) && /[a-zA-Z]/g.test(val);
+    if (usrValidPasswd){
+        document.getElementById(auth.paswWarnTexID).style.display = "none";
+        obj.classList.add("is-success");
+        obj.classList.remove("is-danger");
+        auth.hasValidPasswd = true;
+    }
 
+    else {
+        document.getElementById(auth.paswWarnTexID).style.display = "block";
+        obj.classList.remove("is-success");
+        obj.classList.add("is-danger");
+        auth.hasValidPasswd = false;
+    }
+
+    checkIfValid();
 }
 
+function onAgreeboxChange(val) {
+    auth.hasCheckedBox = val;
+    checkIfValid();
+}
+
+function checkIfValid() {
+    document.getElementById(auth.primButtonID).disabled = !(auth.hasValidUsrname && auth.hasValidPasswd && auth.hasCheckedBox);
+}
+
+function sendToValidate() {
+    if (auth.hasValidUsrname && auth.hasValidPasswd && auth.hasCheckedBox) {
+        window.location.href = "/#/verification";
+    }
+}
+
+/*
 function EnterAuthMode(mode) {
     switch (mode) {
         case 'login':
-            document.getElementById(auth.elemID).classList.add("unsite-anim-show");/*
-            document.getElementById(auth.titleID).innerText = "Login"; //Cheep solution! This let is also used to keep
             document.getElementById(auth.agreeBoxID).checked = true;   //track of 'auth mode'. If you want to add auth mode,
             document.getElementById(auth.agreeBoxID).hidden = true;    //(or edit the name), make sure to also edit it
-            document.getElementById(auth.agreeTextID).hidden = true;   //at the 'submit' case
-            document.getElementById(auth.primButtonID).disabled = false;*/
+            document.getElementById(auth.primButtonID).disabled = false;
             break;
 
         case 'signu':
-            document.getElementById(auth.elemID).classList.add("unsite-anim-show");/*
-            document.getElementById(auth.titleID).innerText = "Signup";
             document.getElementById(auth.agreeBoxID).checked = false;
             document.getElementById(auth.agreeBoxID).hidden = false;
-            document.getElementById(auth.agreeTextID).hidden = false;
-            document.getElementById(auth.primButtonID).disabled = true;*/
+            document.getElementById(auth.primButtonID).disabled = true;
             break;
 
         case 'submit':
@@ -78,10 +114,9 @@ function EnterAuthMode(mode) {
             break; 
     }
 
-    //ResetForm();
 }
-/*
 
+/*
 //init stuff
 //alert("troll");
 
@@ -195,4 +230,4 @@ function EnterAuthMode(mode) {
     }
 
     ResetForm();
-}
+}*/
