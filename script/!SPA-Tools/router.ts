@@ -1,7 +1,11 @@
+'use strict';
+
 const rootElement = document.getElementById("spa-root");
 const routerLoggingPrefix = "[SPA-Router]: 👉️ ";
 const routes = {
     "#/":               { title: "UnSite - Welcome!",       html: "/html/auth/auth.html",       js: "/script/auth/auth.js" },
+    "#/signin":         { title: "UnSite - Welcome!",       html: "/html/auth/accountman.html", js: "/script/auth/auth.js" },
+    "#/signup":         { title: "UnSite - Welcome!",       html: "/html/auth/accountman.html", js: "/script/auth/auth.js" },
     "#/verification":   { title: "UnSite - Verification",   html: "/html/tasks/!first.html",    js: "/script/tasks/!first.js" },
 };
 
@@ -43,6 +47,8 @@ function linkJS(source) {
     script.src = source;
     
     document.head.appendChild(script);    
+    console.log(script);
+    script.remove();
 }
 
 async function router(routeNewObject) {
@@ -53,7 +59,7 @@ async function router(routeNewObject) {
             await requestPage(routeNewObject.html).then( function(value) {
                 applyPage(value);
                 if (routeNewObject.js != null) {
-                    linkJS(routeNewObject.js);
+                    //linkJS(routeNewObject.js);
                 }
             })    
 

@@ -1,15 +1,17 @@
+'use strict';
+
 const tasks = {
-    0 :                   { title: "Verification",   html: "/html/tasks/not-a-robot.html",      func: null },
-    1 :                   { title: "Verification",   html: "/html/tasks/not-a-robot.html",      func: null },
-    2 :                   { title: "Verification",   html: "/html/tasks/temp1.html",            func: null },
-    3 :                   { title: "Verification",   html: "/html/tasks/temp2.html",            func: null },
-    4 :                   { title: "Verification",   html: "/html/tasks/temp3.html",            func: null },
-    5 :                   { title: "Verification",   html: "/html/tasks/temp4.html",            func: null },
-    6 :                   { title: "Verification",   html: "/html/tasks/temp5.html",            func: null },
-    7 :                   { title: "Verification",   html: "/html/tasks/temp6.html",            func: null },
-    8 :                   { title: "Verification",   html: "/html/tasks/temp7.html",            func: null },
-    9 :                   { title: "Verification",   html: "/html/tasks/temp8.html",            func: null },
-    10:                   { title: "Verification",   html: "/html/tasks/temp9.html",            func: null },
+    0 :                   { title: "Verification",   html: "/html/tasks/not-a-robot.html",      js: null },
+    1 :                   { title: "Verification",   html: "/html/tasks/not-a-robot.html",      js: null },
+    2 :                   { title: "Verification",   html: "/html/tasks/temp1.html",            js: null },
+    3 :                   { title: "Verification",   html: "/html/tasks/temp2.html",            js: null },
+    4 :                   { title: "Verification",   html: "/html/tasks/temp3.html",            js: null },
+    5 :                   { title: "Verification",   html: "/html/tasks/temp4.html",            js: null },
+    6 :                   { title: "Verification",   html: "/html/tasks/temp5.html",            js: null },
+    7 :                   { title: "Verification",   html: "/html/tasks/temp6.html",            js: null },
+    8 :                   { title: "Verification",   html: "/html/tasks/temp7.html",            js: null },
+    9 :                   { title: "Verification",   html: "/html/tasks/temp8.html",            js: null },
+    10:                   { title: "Verification",   html: "/html/tasks/temp9.html",            js: null },
 };
 
 const order = shuffle(Object.keys(tasks))

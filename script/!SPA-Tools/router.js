@@ -1,7 +1,10 @@
+'use strict';
 const rootElement = document.getElementById("spa-root");
 const routerLoggingPrefix = "[SPA-Router]: 👉️ ";
 const routes = {
     "#/": { title: "UnSite - Welcome!", html: "/html/auth/auth.html", js: "/script/auth/auth.js" },
+    "#/signin": { title: "UnSite - Welcome!", html: "/html/auth/accountman.html", js: "/script/auth/auth.js" },
+    "#/signup": { title: "UnSite - Welcome!", html: "/html/auth/accountman.html", js: "/script/auth/auth.js" },
     "#/verification": { title: "UnSite - Verification", html: "/html/tasks/!first.html", js: "/script/tasks/!first.js" },
 };
 let routeActive = { key: "#/", value: "#" };
@@ -33,6 +36,8 @@ function linkJS(source) {
     let script = document.createElement('script');
     script.src = source;
     document.head.appendChild(script);
+    console.log(script);
+    script.remove();
 }
 async function router(routeNewObject) {
     if (routeNewObject) {
@@ -41,7 +46,7 @@ async function router(routeNewObject) {
         await requestPage(routeNewObject.html).then(function (value) {
             applyPage(value);
             if (routeNewObject.js != null) {
-                linkJS(routeNewObject.js);
+                //linkJS(routeNewObject.js);
             }
         });
         console.log(routerLoggingPrefix + "(⚪) Requested page \"" + window.location.hash.slice(1) + "\"");
