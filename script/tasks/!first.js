@@ -14,7 +14,6 @@ const tasks = {
 };
 const order = shuffle(Object.keys(tasks));
 let nextTaskButton, currentTaskNr;
-loadTask(0);
 function loadTask(taskNr) {
     requestPage(tasks[order[taskNr]].html).then(function (value) {
         applyPage(value);

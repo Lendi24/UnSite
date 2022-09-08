@@ -78,11 +78,12 @@ function checkIfValid() {
 }
 
 function sendToValidate() {
-    auth.hasValidUsrname = false;
-    auth.hasValidPasswd = false;
-    auth.hasCheckedBox = false;
 
     if (auth.hasValidUsrname && auth.hasValidPasswd && auth.hasCheckedBox) {
+        auth.hasValidUsrname = false;
+        auth.hasValidPasswd = false;
+        auth.hasCheckedBox = false;
+        
         window.location.href = "/#/verification";
     }
 }
