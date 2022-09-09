@@ -1,0 +1,57 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/bulma.css">
+    <title>Email Verification</title>
+</head>
+
+<body>
+
+    </section>
+    <div class="container hero is-fullheight column is-two-thirds is-justify-content-center">
+        <div class="hero box container is-primary is-flex-grow-0">
+            <section class="hero">
+                <div class="hero-body container has-text-centered is-flex-direction-column">
+                    <p class="title">
+                        Email Verification
+                    </p>
+                    <p class="subtitle">
+                        Click the button below to proceed
+                    </p>
+                    
+                </div>
+    
+                <form class="container is-flex is-flex-direction-row" action="mailto:andrew.tate@UnSite.se" method="GET">
+                    <textarea class="is-hidden" name="body">01101000+01100101+011010100010000001100100+01110101+00100000+01101000+01100001+01110010+00100000+01101110+01110101+00100000+01101011+01101111+01101101+01101101+01101001+01110100+00100000+01110100+01101001+01101100+01101100+00100000+01110110+11000011+10100101+01110010+00100000+01110110+01100101+01110010+01110011+01101001+01101111+01101110+00100000+01100001+01110110+00100000+01100101+01101110+00100000+01000101+01101101+01100001+01101001+01101100+00100000+01110110+01100101+01110010+01101001+01100110+01101001+01100101+01110010+01101001+01101110+01100111+00101100+00100000+01100100+01101001+01101110+00100000+01101011+01101111+01100100+00100000+01100110+11000011+10110110+01110010+00100000+01100001+01110100+01110100+00100000+01101011+01101111+01101101+01101101+01100001+00100000+01110110+01101001+01100100+01100001+01110010+01100101+00100000+11000011+10100100+01110010+00100000+00110110+00111001+00110110+00111001+00110110+00111001+00101110
+                </textarea>
+
+                    <div class="field">
+                        <button class="button is-primary is-light mr-3">Get Code</button>
+                    </div>
+
+                    <div class="field">
+                        <div class="control has-icons-left">
+                            <input class="input" type="number" placeholder="Enter verification code">
+                            <span class="icon is-small is-left">
+                                <i class="mdi mdi-account"></i>
+                            </span>
+                        </div>
+                        <p class="help is-danger" id="usr-warn-name" style="display: none;">This code is not valid</p>
+                    </div>
+
+                    <div class="field">
+                        <button class="button is-primary is-light ml-3">Verify Code</button>
+                    </div>
+
+
+                </form>
+    
+        </div>
+    
+    </div>
+</body>
+
+</html>
