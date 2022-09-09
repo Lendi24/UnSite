@@ -1,9 +1,9 @@
 'use strict';
 
-const tasks = {/*
-    0 :                   { html: "/html/tasks/Tos.html",              js: null },*/
-    0 :                   { html: "/html/tasks/not-a-robot.html",      js: new TaskTemp1("not-a-robot") },/*
-    2 :                   { html: "/html/tasks/temp1.html",            js: null },
+const tasks = {
+    0 :                   { html: "/html/tasks/Tos.html",              js: new TaskNotARobot("not-a-robot") },
+    1 :                   { html: "/html/tasks/not-a-robot.html",      js: new TaskNotARobot("not-a-robot") },
+    2 :                   { html: "/html/tasks/temp1.html",            js: new TaskTemp1    ("task-temp-1") },/*
     3 :                   { html: "/html/tasks/temp2.html",            js: null },
     4 :                   { html: "/html/tasks/temp3.html",            js: null },
     5 :                   { html: "/html/tasks/temp4.html",            js: null },
@@ -18,6 +18,8 @@ const order = shuffle(Object.keys(tasks))
 let nextTaskButton:HTMLElement, currentTaskNr:number;
 
 function loadTask(taskNr) {
+    let currentTaskJS = tasks[order[taskNr]].js;
+
     requestPage(tasks[order[taskNr]].html).then( function(value) {
         applyPage(value)
         nextTaskButton = document.getElementById("next-task-button");
@@ -26,7 +28,7 @@ function loadTask(taskNr) {
             loadTask(++taskNr);
         };     
 
-        tasks[order[taskNr]].js.taskLogic();
+        currentTaskJS.js.taskLogic();
     });
 }
 
