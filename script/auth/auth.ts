@@ -74,7 +74,7 @@ function onAgreeboxChange(val) {
 }
 
 function checkIfValid() {
-    document.getElementById(auth.primButtonID).disabled = !(auth.hasValidUsrname && auth.hasValidPasswd && auth.hasCheckedBox);
+    (document.getElementById(auth.primButtonID) as HTMLButtonElement).disabled = !(auth.hasValidUsrname && auth.hasValidPasswd && auth.hasCheckedBox);
 }
 
 function sendToValidate() {

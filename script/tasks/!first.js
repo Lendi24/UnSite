@@ -1,16 +1,15 @@
 'use strict';
 const tasks = {
-    0: { title: "Verification", html: "/html/tasks/Tos.html", js: null },
-    1: { title: "Verification", html: "/html/tasks/not-a-robot.html", js: null },
-    2: { title: "Verification", html: "/html/tasks/temp1.html", js: null },
-    3: { title: "Verification", html: "/html/tasks/temp2.html", js: null },
-    4: { title: "Verification", html: "/html/tasks/temp3.html", js: null },
-    5: { title: "Verification", html: "/html/tasks/temp4.html", js: null },
-    6: { title: "Verification", html: "/html/tasks/temp5.html", js: null },
-    7: { title: "Verification", html: "/html/tasks/temp6.html", js: null },
-    8: { title: "Verification", html: "/html/tasks/temp7.html", js: null },
-    9: { title: "Verification", html: "/html/tasks/temp8.html", js: null },
-    10: { title: "Verification", html: "/html/tasks/temp9.html", js: null },
+    0: { html: "/html/tasks/not-a-robot.html", js: new TaskTemp1("not-a-robot") }, /*
+    2 :                   { html: "/html/tasks/temp1.html",            js: null },
+    3 :                   { html: "/html/tasks/temp2.html",            js: null },
+    4 :                   { html: "/html/tasks/temp3.html",            js: null },
+    5 :                   { html: "/html/tasks/temp4.html",            js: null },
+    6 :                   { html: "/html/tasks/temp5.html",            js: null },
+    7 :                   { html: "/html/tasks/temp6.html",            js: null },
+    8 :                   { html: "/html/tasks/temp7.html",            js: null },
+    9 :                   { html: "/html/tasks/temp8.html",            js: null },
+    10:                   { html: "/html/tasks/temp9.html",            js: null },*/
 };
 const order = shuffle(Object.keys(tasks));
 let nextTaskButton, currentTaskNr;
@@ -21,6 +20,7 @@ function loadTask(taskNr) {
         nextTaskButton.onclick = function () {
             loadTask(++taskNr);
         };
+        tasks[order[taskNr]].js.taskLogic();
     });
 }
 /*
