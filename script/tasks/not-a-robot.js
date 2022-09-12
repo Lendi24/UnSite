@@ -10,7 +10,7 @@ class TaskNotARobot extends TaskObj {
         hint = document.getElementById("hint-text");
         console.log(this);
         deb = this;
-        this.CenterElm(box);
+        deb.CenterElm(box);
         box.onmouseenter = function () {
             if (!done) {
                 if (triesBeforeHint > 0) {
@@ -19,7 +19,7 @@ class TaskNotARobot extends TaskObj {
                 else if (triesBeforeHint == 0) {
                     hint.innerHTML = "<br>Psst!<br>Have you tried resizing the window?";
                 }
-                this.RandomPos(box);
+                deb.RandomPos(box);
                 setTimeout(() => { }, 10);
             }
         };
@@ -34,15 +34,15 @@ class TaskNotARobot extends TaskObj {
             }, 1420);
         };
         window.onresize = function () {
-            this.CenterElm(box);
+            deb.CenterElm(box);
         };
     }
     CenterElm(elm) {
-        elm.style.left = window.innerWidth / 2 - elm.clientWidth / 2;
-        elm.style.bottom = window.innerHeight / 2 - elm.clientHeight / 2;
+        elm.style.left = (window.innerWidth / 2 - elm.clientWidth / 2).toString() + "px";
+        elm.style.bottom = (window.innerHeight / 2 - elm.clientHeight / 2).toString() + "px";
     }
     RandomPos(elm) {
-        elm.style.left = Math.floor(Math.random() * (window.innerWidth - (elm.clientWidth + 20)));
-        elm.style.bottom = Math.floor(Math.random() * (window.innerHeight - elm.clientHeight));
+        elm.style.left = Math.floor(Math.random() * (window.innerWidth - elm.clientWidth)).toString() + "px";
+        elm.style.bottom = Math.floor(Math.random() * (window.innerHeight - elm.clientHeight)).toString() + "px";
     }
 }

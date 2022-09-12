@@ -3,7 +3,7 @@ var deb;
 class TaskNotARobot extends TaskObj {
   taskLogic() {
     console.log("yo");
-    var box, button, done, hint;
+    var box, button, done, hint;    
     var triesBeforeHint = 10;
 
     done = false;
@@ -13,8 +13,8 @@ class TaskNotARobot extends TaskObj {
     console.log(this);
 
     deb = this;
-    
-    this.CenterElm(box);
+
+    deb.CenterElm(box);
     
 
     box.onmouseenter = function () {
@@ -25,7 +25,7 @@ class TaskNotARobot extends TaskObj {
           hint.innerHTML = "<br>Psst!<br>Have you tried resizing the window?";
         }
 
-        this.RandomPos(box);
+        deb.RandomPos(box);
         setTimeout(() => {}, 10);
       }
     };
@@ -42,21 +42,22 @@ class TaskNotARobot extends TaskObj {
     };
 
     window.onresize = function () {
-      this.CenterElm(box);
+        deb.CenterElm(box);
     };
   }
 
   CenterElm(elm) {
-    elm.style.left = window.innerWidth / 2 - elm.clientWidth / 2;
-    elm.style.bottom = window.innerHeight / 2 - elm.clientHeight / 2;
+    elm.style.left   = (window.innerWidth / 2 - elm.clientWidth / 2).toString() + "px";
+    elm.style.bottom = (window.innerHeight / 2 - elm.clientHeight / 2).toString() + "px";
   }
 
   RandomPos(elm) {
     elm.style.left = Math.floor(
-      Math.random() * (window.innerWidth - (elm.clientWidth + 20))
-    );
+        Math.random() * (window.innerWidth - elm.clientWidth)
+    ).toString() + "px";
+
     elm.style.bottom = Math.floor(
-      Math.random() * (window.innerHeight - elm.clientHeight)
-    );
+        Math.random() * (window.innerHeight - elm.clientHeight)
+    ).toString() + "px";
   }
 }
