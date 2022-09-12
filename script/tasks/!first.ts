@@ -1,7 +1,7 @@
 'use strict';
 
-const tasks = {/*
-    0 : { html: "/html/tasks/Tos.html",              js: new TaskNotARobot("not-a-robot") },*/
+const tasks = {
+    0 : { html: "/html/tasks/Tos.html",              js: new TaskObj("") },
     1 : { html: "/html/tasks/not-a-robot.html",      js: new TaskNotARobot("not-a-robot") },/*
     2 : { html: "/html/tasks/temp1.html",            js: new TaskTemp1    ("task-temp-1") },
     3 : { html: "/html/tasks/temp2.html",            js: null },
