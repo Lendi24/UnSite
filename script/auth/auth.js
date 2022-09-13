@@ -8,6 +8,8 @@ class auth {
     hasValidUsrname;
     hasValidPasswd;
     hasCheckedBox;
+    currentUsername;
+    currentPassword;
     //text to hide or unhide if feild is correct
     static userWarnTexID = "usr-warn-name";
     static paswWarnTexID = "usr-warn-psw";
@@ -19,11 +21,14 @@ class auth {
     static hasValidUsrname = false;
     static hasValidPasswd = false;
     static hasCheckedBox = false;
+    static currentUsername = "";
+    static currentPassword = "";
 }
 /*
 }*/
 //document.getElementById(auth.titleID) 
 function onUnameChange(val, obj) {
+    auth.currentUsername = val;
     let usrValidName = val.replace(/\s/g, "") != "";
     if (usrValidName) {
         document.getElementById(auth.userWarnTexID).style.display = "none";
@@ -40,6 +45,7 @@ function onUnameChange(val, obj) {
     checkIfValid();
 }
 function onPasswdChange(val, obj) {
+    auth.currentPassword = val;
     let usrValidPasswd = /\d/.test(val) && /[a-zA-Z]/g.test(val);
     if (usrValidPasswd) {
         document.getElementById(auth.paswWarnTexID).style.display = "none";
@@ -62,11 +68,32 @@ function onAgreeboxChange(val) {
 function checkIfValid() {
     document.getElementById(auth.primButtonID).disabled = !(auth.hasValidUsrname && auth.hasValidPasswd && auth.hasCheckedBox);
 }
-function sendToValidate() {
+function sendToValidate(val) {
     if (auth.hasValidUsrname && auth.hasValidPasswd && auth.hasCheckedBox) {
         auth.hasValidUsrname = false;
         auth.hasValidPasswd = false;
         auth.hasCheckedBox = false;
-        window.location.href = "/#/verification";
+        switch (val) {
+            case "signup":
+                window.location.href = "/#/verification";
+                break;
+            case "login":
+                if (users[auth.currentUsername] != null) {
+                    if (users[auth.currentUsername].passwd == auth.currentPassword) {
+                        ignoreNextCall = 1;
+                        window.location.href = "/#/mypage";
+                        requestPage(users[auth.currentUsername].html).then(function (value) {
+                            applyPage(value);
+                        });
+                    }
+                }
+                break;
+            default:
+                console.log('Value was not valid!');
+                break;
+        }
     }
 }
+let users = {
+    "testname": { passwd: "thebigyellowinthesky114", html: "/html/auth/users/!secretusr.html" }, //Keep this here! It will be our little secret :-) 
+};
