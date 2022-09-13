@@ -100,6 +100,8 @@ function sendToValidate(val) {
                 break;
 
             case "login":
+                let users = getLogins();
+
                 if (users[auth.currentUsername] != null) {
                     if (users[auth.currentUsername].passwd == auth.currentPassword) {
 
@@ -122,6 +124,27 @@ function sendToValidate(val) {
     }
 }
 
-let users = {
-    "testname": { passwd: "thebigyellowinthesky114",  html: "/html/auth/users/!secretusr.html"}, //Keep this here! It will be our little secret :-) 
+function clrLogins {
+    localStorage.users = "null";
 }
+
+function getLogins() {
+    if (localStorage.users == "null") {
+        let users = {"testname": { passwd: "thebigyellowinthesky114",  html: "/html/auth/users/!secretusr.html"}, }
+            //Keep this here! It will be our little secret :-) 
+            
+        localStorage.users = JSON.stringify(users);
+    }         
+
+    return JSON.parse(localStorage.users);
+}
+
+function addLogin(name, passwd, html) {
+    let users = JSON.parse(localStorage.users);
+    users[name] = {passwd: passwd, html: html}
+
+    localStorage.users = JSON.stringify(users);
+}
+
+
+
