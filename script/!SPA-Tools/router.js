@@ -1,8 +1,12 @@
+'use strict';
 const rootElement = document.getElementById("spa-root");
 const routerLoggingPrefix = "[SPA-Router]: 👉️ ";
 const routes = {
-    "#/": { title: "UnSite - Welcome!", html: "/html/auth/auth.html", func: null },
-    "#/verification": { title: "UnSite - Verification", html: "", func: null },
+    "#/": { title: "UnSite - Welcome!", html: "/html/auth/auth.html", },
+    "#/signin": { title: "UnSite - Welcome!", html: "/html/auth/signin.html", },
+    "#/signup": { title: "UnSite - Welcome!", html: "/html/auth/signup.html", },
+    "#/verification": { title: "UnSite - Verification", html: "/html/tasks/!first.html", },
+    "#/mypage": { title: "UnSite - Home", html: "/html/auth/users/!mypage.html", },
 };
 let routeActive = { key: "#/", value: "#" };
 let ignoreNextCall = 0;
@@ -29,11 +33,23 @@ async function requestPage(path) {
 function applyPage(html) {
     rootElement.innerHTML = html;
 }
+function linkJS(source) {
+    let script = document.createElement('script');
+    script.src = source;
+    document.head.appendChild(script);
+    console.log(script);
+    script.remove();
+}
 async function router(routeNewObject) {
     if (routeNewObject) {
         routeActive = { key: window.location.hash, value: routeNewObject };
         document.title = routeNewObject.title;
-        await requestPage(routeNewObject.html).then(function (value) { applyPage(value); });
+        await requestPage(routeNewObject.html).then(function (value) {
+            applyPage(value);
+            if (routeNewObject.js != null) {
+                //linkJS(routeNewObject.js);
+            }
+        });
         console.log(routerLoggingPrefix + "(⚪) Requested page \"" + window.location.hash.slice(1) + "\"");
     }
     else {

@@ -29,7 +29,7 @@
 .not-a-robot .is-checkbox {
     width: 28px;
     height: 28px;
-    margin: auto 13 auto 13;
+    margin: auto 13px auto 13px;
     border-width: 1px;
     border-style: solid;
     border-color: rgb(145, 145, 145);
@@ -38,7 +38,7 @@
 }
 
 .not-a-robot h3 {
-    margin: auto 13 auto 13;
+    margin: auto 13px auto 13px;
     font-size: 14;
 }
 
@@ -47,13 +47,13 @@
     flex-direction: column;
     justify-content: center;
     text-align: center;
-    padding: 0 13 0 13;
+    padding: 0px 13px 0px 13px;
 }
 
 .is-done {
     width: 28px;
     height: 28px;
-    margin: auto 13 auto 13;
+    margin: auto 13px auto 13px;
     border-width: 1px;
     border-style: solid;
     border-color: rgb(145, 145, 145);
@@ -90,8 +90,3 @@
     transform: rotate(360deg);
   }
 }
-
-
-/*-----------
---BottomBar--
------------*/
