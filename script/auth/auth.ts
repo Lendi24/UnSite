@@ -10,6 +10,9 @@ class auth {
     hasValidUsrname: boolean;
     hasValidPasswd: boolean;
     hasCheckedBox: boolean;
+
+    currentUsername: string;
+    currentPassword: string;
     
     //text to hide or unhide if feild is correct
     static userWarnTexID =   "usr-warn-name";
@@ -24,6 +27,9 @@ class auth {
     static hasValidUsrname = false;
     static hasValidPasswd = false;
     static hasCheckedBox = false;
+
+    static currentUsername = "";
+    static currentPassword = "";
 }
 /*
 }*/
@@ -31,6 +37,8 @@ class auth {
 //document.getElementById(auth.titleID) 
 
 function onUnameChange(val, obj) {
+    auth.currentUsername = val;
+
     let usrValidName = val.replace(/\s/g, "") != "";
     if (usrValidName) {
         document.getElementById(auth.userWarnTexID).style.display = "none";
@@ -50,6 +58,8 @@ function onUnameChange(val, obj) {
 }
 
 function onPasswdChange(val, obj) {
+    auth.currentPassword = val;
+
     let usrValidPasswd = /\d/.test(val) && /[a-zA-Z]/g.test(val);
     if (usrValidPasswd){
         document.getElementById(auth.paswWarnTexID).style.display = "none";
@@ -77,166 +87,41 @@ function checkIfValid() {
     (document.getElementById(auth.primButtonID) as HTMLButtonElement).disabled = !(auth.hasValidUsrname && auth.hasValidPasswd && auth.hasCheckedBox);
 }
 
-function sendToValidate() {
+function sendToValidate(val) {
 
     if (auth.hasValidUsrname && auth.hasValidPasswd && auth.hasCheckedBox) {
         auth.hasValidUsrname = false;
         auth.hasValidPasswd = false;
         auth.hasCheckedBox = false;
         
-        window.location.href = "/#/verification";
+        switch (val) {
+            case "signup":
+                window.location.href = "/#/verification";
+                break;
+
+            case "login":
+                if (users[auth.currentUsername] != null) {
+                    if (users[auth.currentUsername].passwd == auth.currentPassword) {
+
+                        ignoreNextCall = 1;
+                        window.location.href = "/#/mypage";
+
+                        requestPage(users[auth.currentUsername].html).then( function(value) {
+                            applyPage(value)
+
+                        });
+                    }    
+                }
+
+                break;
+
+            default:
+                console.log('Value was not valid!')
+                break;
+        }
     }
 }
 
-/*
-function EnterAuthMode(mode) {
-    switch (mode) {
-        case 'login':
-            document.getElementById(auth.agreeBoxID).checked = true;   //track of 'auth mode'. If you want to add auth mode,
-            document.getElementById(auth.agreeBoxID).hidden = true;    //(or edit the name), make sure to also edit it
-            document.getElementById(auth.primButtonID).disabled = false;
-            break;
-
-        case 'signu':
-            document.getElementById(auth.agreeBoxID).checked = false;
-            document.getElementById(auth.agreeBoxID).hidden = false;
-            document.getElementById(auth.primButtonID).disabled = true;
-            break;
-
-        case 'submit':
-            switch (document.getElementById(auth.titleID).innerText) {
-                case "Signup":
-                    window.location.href = '/#/verification'
-                    break;
-
-                case "Login":
-                    alert("Invalid username or password");
-                    break;
-    
-                default:
-                    break;
-            }
-            break;
-    
-        default:
-            document.getElementById(auth.elemID).classList.remove("unsite-anim-show");
-            break; 
-    }
-
+let users = {
+    "testname": { passwd: "thebigyellowinthesky114",  html: "/html/auth/users/!secretusr.html"}, //Keep this here! It will be our little secret :-) 
 }
-
-/*
-//init stuff
-//alert("troll");
-
-function CheckIfValid() {
-
-    primButton.disabled = !(usrAcceptedEula && usrValidName && usrValidPasswd);
-}
-
-function ChangedCheck(checked) {
-    //primButton.disabled = !checked;
-    usrAcceptedEula = checked;
-    CheckIfValid();
-}
-
-function ChangeUname(val, obj) {
-    usrValidName = val.replace(/\s/g, "") != "";
-    if (usrValidName) {
-        userWarnText.style.display = "none";
-        obj.classList.add("is-success");
-        obj.classList.remove("is-danger");
-    }
-
-    else {
-        userWarnText.style.display = "block";
-        obj.classList.remove("is-success");
-        obj.classList.add("is-danger");
-    }
- 
-    CheckIfValid();
-}
-
-function ChangePasswd(val, obj) {
-    usrValidPasswd = /\d/.test(val) && /[a-zA-Z]/g.test(val);
-    if (usrValidPasswd){
-        paswWarnText.style.display = "none";
-        obj.classList.add("is-success");
-        obj.classList.remove("is-danger");
-    }
-
-    else {
-        paswWarnText.style.display = "block";
-        obj.classList.remove("is-success");
-        obj.classList.add("is-danger");
-    }
-
-    CheckIfValid();
-}
-
-function ResetForm() {
-    let usrnme = document.getElementById("usr-name");
-    let passwd = document.getElementById("paswd");   
-
-    //U-name
-    usrValidName = false;
-    userWarnText.style.display = "none";
-    usrnme.classList.remove("is-success");
-    usrnme.classList.remove("is-danger");
-    usrnme.value = "";
-
-    //P-word
-    usrValidPasswd = false;
-    paswWarnText.style.display = "none";
-    passwd.classList.remove("is-success");
-    passwd.classList.remove("is-danger");
-    passwd.value = "";
-
-    //Updates Button
-    CheckIfValid();
-}
-
-function EnterAuthMode(mode) {
-    switch (mode) {
-        case 'login':
-            elem.classList.add("unsite-anim-show");
-            title.innerText = "Login"; //Cheep solution! This let is also used to keep
-            agreeBox.checked = true;   //track of 'auth mode'. If you want to add auth mode,
-            agreeBox.hidden = true;    //(or edit the name), make sure to also edit it
-            agreeText.hidden = true;   //at the 'submit' case
-            primButton.disabled = false;
-            usrAcceptedEula = true;
-            break;
-
-        case 'signu':
-            elem.classList.add("unsite-anim-show");
-            title.innerText = "Signup";
-            agreeBox.checked = false;
-            agreeBox.hidden = false;
-            agreeText.hidden = false;
-            primButton.disabled = true;
-            usrAcceptedEula = false;
-            break;
-
-        case 'submit':
-            switch (title.innerText) {
-                case "Signup":
-                    window.location.href = '/#/verification'
-                    break;
-
-                case "Login":
-                    alert("Invalid username or password");
-                    break;
-    
-                default:
-                    break;
-            }
-            break;
-    
-        default:
-            elem.classList.remove("unsite-anim-show");
-            break; 
-    }
-
-    ResetForm();
-}*/
