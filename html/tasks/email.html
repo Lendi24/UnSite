@@ -34,12 +34,14 @@
                     <textarea id="randomnumber" class="is-hidden" name="body"></textarea>
 
                     <div class="field">
-                        <button onclick="generateCode(12)" class="button is-primary is-light mr-3">Get Code</button>
+                        <button id="get-code-btn" class="button is-primary is-light mr-3">Get Code</button>
                     </div>
+
+                    <a id="next-task-button"></a>
     
                     <div class="field">
                         <div class="control has-icons-left">
-                            <input id="gettext" class="input" type="number" placeholder="Enter verification code">
+                            <input id="user-input" class="input" type="number" placeholder="Enter verification code">
                             <span class="icon is-small is-left">
                                 <i class="mdi mdi-account"></i>
                             </span>
@@ -48,14 +50,10 @@
                     </div>
     
                     <div class="">
-                        <button onclick="verifyme()" class="button is-primary is-light ml-3">Verify Code</button>
+                        <button id="verify-code-btn" class="button is-primary is-light ml-3">Verify Code</button>
                     </div>    
-                </div>
-
-
-
+            </div>
         </div>
-
     </div>
 </body>
 
