@@ -124,7 +124,7 @@ function sendToValidate(val) {
     }
 }
 
-function clrLogins {
+function clrLogins() {
     localStorage.users = "null";
 }
 
