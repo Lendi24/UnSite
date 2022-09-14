@@ -1,9 +1,12 @@
 'use strict';
 const tasks = {
-    0: { html: "/html/tasks/Tos.html", js: new TaskObj("") },
-    1: { html: "/html/tasks/not-a-robot.html", js: new TaskNotARobot("not-a-robot") },
-    2: { html: "/html/tasks/email.html", js: new TaskEmailVerify("email-verify") }, /*
-    3 : { html: "/html/tasks/temp2.html",            js: null },
+    0: { html: "/html/tasks/temp1.html", js: new TaskAdPage("ad-page") }, /*
+    
+    7 : { html: "/html/tasks/email.html",            js: new TaskEmailVerify("email-verify") },/*
+    8 : { html: "/html/tasks/Tos.html",              js: new TaskObj("terms-of-service") },
+    9 : { html: "/html/tasks/not-a-robot.html",      js: new TaskNotARobot("not-a-robot") },
+
+
     4 : { html: "/html/tasks/temp3.html",            js: null },
     5 : { html: "/html/tasks/temp4.html",            js: null },
     6 : { html: "/html/tasks/temp5.html",            js: null },
