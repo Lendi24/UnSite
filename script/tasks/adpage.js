@@ -5,6 +5,7 @@ class TaskAdPage extends TaskObj {
     taskLogic() {
         const obj = this;
         const imageRootFolder = "/assets/img/tasks/adpage/";
+        let firstRun = true;
         obj.zIndexTop = 0;
         obj.images = [
             "burgor.png",
@@ -18,17 +19,20 @@ class TaskAdPage extends TaskObj {
         container.style.height = "100vh";
         container.style.overflow = "hidden";
         //40
-        for (let i = 0; i < 0; i++) {
-            setTimeout(() => {
-                obj.newWindow(container, imageRootFolder + obj.images[Math.floor(Math.random() * obj.images.length)], obj, 800, 500);
-            }, (1000) + 100 * i);
-            /*
-            obj.newWindow(
-                container,
-                imageRootFolder + obj.images[Math.floor(Math.random()*obj.images.length)],
-                obj, 800, 500,
-            );*/
-        }
+        document.getElementById("multiclick-button").onclick = function (e) {
+            document.getElementById("multiclick-bar").value += 5;
+            if (firstRun) {
+                firstRun = false;
+                for (let i = 0; i < 40; i++) {
+                    setTimeout(() => {
+                        obj.newWindow(container, imageRootFolder + obj.images[Math.floor(Math.random() * obj.images.length)], obj, 800, 500);
+                    }, (1000) + 100 * i);
+                }
+                window.setInterval(function () {
+                    document.getElementById("multiclick-bar").value -= 1;
+                }, 100);
+            }
+        };
     }
     newWindow(parent, imgPath, obj, width, height) {
         let newWindow = document.createElement("window");
