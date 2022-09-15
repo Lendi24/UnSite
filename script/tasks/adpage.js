@@ -11,12 +11,14 @@ class TaskAdPage extends TaskObj {
             "android-virus.png",
         ];
         console.log();
-        obj.newWindow(document.getElementById("spa-root"), imageRootFolder + obj.images[Math.floor(Math.random() * obj.images.length)]);
+        for (let i = 0; i < 20; i++) {
+            obj.newWindow(document.getElementById("spa-root"), imageRootFolder + obj.images[Math.floor(Math.random() * obj.images.length)]);
+        }
     }
     newWindow(parent, imgPath) {
         let newWindow = document.createElement("window");
         newWindow = parent.appendChild(newWindow);
-        newWindow.style.width = "500px";
+        newWindow.style.width = "800px";
         newWindow.style.height = "500px";
         newWindow.style.backgroundColor = "lightgray";
         newWindow.style.position = "absolute";
@@ -28,7 +30,22 @@ class TaskAdPage extends TaskObj {
         newWindow.addEventListener("mousedown", function() {
             
         });*/
+        //MouseDrag start event
         newWindow.onmousedown = function (e) {
+            e.preventDefault();
+            let offsetX = newWindow.getBoundingClientRect().left - e.clientX;
+            let offsetY = newWindow.getBoundingClientRect().top - e.clientY;
+            newWindow.style.zIndex = "2";
+            //MouseDrag move event  
+            document.onmousemove = function (e) {
+                newWindow.style.left = (e.clientX + (offsetX)) + "px";
+                newWindow.style.top = (e.clientY + (offsetY)) + "px";
+            };
+            //MouseDrag stop event
+            document.onmouseup = function (e) {
+                document.onmousemove = null;
+                newWindow.style.zIndex = "1";
+            };
         };
     }
 }
