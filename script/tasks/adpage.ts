@@ -20,15 +20,15 @@ class TaskAdPage extends TaskObj {
         container.style.width  = "100vw";
         container.style.height = "100vh";
         container.style.overflow = "hidden";
-        
-        for (let i = 0; i < 50; i++) {
+        //40
+        for (let i = 0; i < 0; i++) {
             setTimeout(() => {   
                 obj.newWindow(
                     container,
                     imageRootFolder + obj.images[Math.floor(Math.random()*obj.images.length)],
                     obj, 800, 500,
                 );
-            }, 100 * i);
+            }, (1000)+100 * i);
 
 
             /*
