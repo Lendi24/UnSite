@@ -3,11 +3,11 @@
 const rootElement = document.getElementById("spa-root");
 const routerLoggingPrefix = "[SPA-Router]: 👉️ ";
 const routes = {
-    "#/":               { title: "UnSite - Welcome!",       html: "/html/auth/auth.html",         },
-    "#/signin":         { title: "UnSite - Welcome!",       html: "/html/auth/signin.html",       },
-    "#/signup":         { title: "UnSite - Welcome!",       html: "/html/auth/signup.html",       },
-    "#/verification":   { title: "UnSite - Verification",   html: "/html/tasks/!first.html",      },
-    "#/mypage":         { title: "UnSite - Home",           html: "/html/auth/users/!mypage.html",},
+    "#/":                { title: "UnSite - Welcome!",       html: "/html/auth/auth.html",         },
+    "#/signin/":         { title: "UnSite - Welcome!",       html: "/html/auth/signin.html",       },
+    "#/signup/":         { title: "UnSite - Welcome!",       html: "/html/auth/signup.html",       },
+    "#/verification/":   { title: "UnSite - Verification",   html: "/html/tasks/!first.html",      },
+    "#/mypage/":         { title: "UnSite - Home",           html: "/html/auth/users/!mypage.html",},
 };
 
 
@@ -15,9 +15,15 @@ let routeActive = {key: "#/", value: "#"};
 let ignoreNextCall = 0;
 
 function requestError() {
-    return (
-        "<h1>Error 404!</h1>"
-    );
+    if (window.location.hash == "") {
+        window.location.hash = "#/";
+    }
+
+    else {
+        return (
+            "<h1>Error 404!</h1>"
+        );    
+    }
 }
 
 async function requestPage(path) {
@@ -29,7 +35,6 @@ async function requestPage(path) {
             }
             else {
                 console.log(routerLoggingPrefix+"(🔴) Could not find requested page on server \""+window.location.hash.slice(1)+"\"" + " on server or cache"); 
-                routeActive  = {key: "#/", value: "#"};
                 sendPromisedPage(requestError);
             }
         };
@@ -54,7 +59,6 @@ function linkJS(source) {
 
 async function router(routeNewObject) {
     if (routeNewObject) {
-            routeActive = {key: window.location.hash, value: routeNewObject};
             document.title = routeNewObject.title;            
 
             await requestPage(routeNewObject.html).then( function(value) {
@@ -79,7 +83,9 @@ window.addEventListener('hashchange', function (e) {
 
 function checkUrlHash() {
     if (ignoreNextCall <= 0) {
-        var hash = window.location.hash;
-        router(routes[hash]);    
+        router(routes[
+            window.location.hash.length - 1 == window.location.hash.lastIndexOf('/') ?
+            window.location.hash : window.location.hash + '/'
+        ]);    
     } else ignoreNextCall--;
 }
