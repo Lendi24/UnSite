@@ -1,6 +1,6 @@
 'use strict';
 const tasks = {
-    0: { html: "/html/tasks/temp1.html", js: new TaskAdPage("ad-page") }, /*
+    0: { html: "/html/tasks/adpage.html", js: new TaskAdPage("ad-page") }, /*
     
     7 : { html: "/html/tasks/email.html",            js: new TaskEmailVerify("email-verify") },/*
     8 : { html: "/html/tasks/Tos.html",              js: new TaskObj("terms-of-service") },
