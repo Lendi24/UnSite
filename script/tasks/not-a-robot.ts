@@ -19,7 +19,7 @@ class TaskNotARobot extends TaskObj {
         if (triesBeforeHint > 0) {
           triesBeforeHint--;
         } else if (triesBeforeHint == 0) {
-          hint.innerHTML = "<br>Psst!<br>Have you tried resizing the window?";
+          hint.innerHTML = "<br>Not working for you?<br>Hmm.. You must be doing it wrong";
         }
 
         obj.RandomPos(box);
