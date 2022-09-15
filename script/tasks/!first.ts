@@ -3,7 +3,7 @@
 const tasks = {
 
 
-    1 : { html: "/html/tasks/adpage.html",            js: new TaskAdPage("ad-page") },
+    1 : { html: "/html/tasks/adpage.html",           js: new TaskAdPage("ad-page") },
     2 : { html: "/html/tasks/email.html",            js: new TaskEmailVerify("email-verify") },
     3 : { html: "/html/tasks/Tos.html",              js: new TaskObj("terms-of-service") },
     4 : { html: "/html/tasks/not-a-robot.html",      js: new TaskNotARobot("not-a-robot") },
@@ -11,7 +11,7 @@ const tasks = {
 
     0 : { html: "/html/tasks/temp3.html",            js: null },
 
-    
+
     5 : { html: "/html/tasks/temp4.html",            js: null },
     6 : { html: "/html/tasks/temp5.html",            js: null },
     7 : { html: "/html/tasks/temp6.html",            js: null },

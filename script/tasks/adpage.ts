@@ -54,7 +54,9 @@ class TaskAdPage extends TaskObj {
 
                         document.getElementById("multiclick-button").classList.add("is-loading");
                         
-                        setTimeout(document.getElementById("next-task-button").click, 800);
+                        setTimeout(() => {
+                            document.getElementById("next-task-button").click();
+                        }, 800);
                     }
 
                     else {
