@@ -26,7 +26,7 @@
     <div class="field">
         <div class="control" id="auth-agree-text">
             <label class="checkbox">
-                <input type="checkbox" onchange="onAgreeboxChange(checked)" id="auth-agree-box">
+                <input type="checkbox" onchange="onAgreeboxChange(checked, this)" id="auth-agree-box">
                 I agree to the <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">terms and conditions</a>
             </label>
         </div>
@@ -34,7 +34,7 @@
 
     <div class="field is-grouped">
         <div class="control">
-            <button class="button is-primary"          onclick="sendToValidate('signup')" id="button-prim" disabled>Login</button>
+            <button class="button is-primary"          onclick="sendToValidate('signup')" id="button-prim" disabled>Create a account</button>
             <a      class="button is-primary is-light" href="#/" id="button-sec">Cancel</a>
         </div>
     </div> 

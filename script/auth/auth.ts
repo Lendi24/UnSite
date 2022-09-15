@@ -23,6 +23,10 @@ class auth {
     static secButtonID   =   "button-sec";
     static agreeBoxID    =   "auth-agree-box";
 
+    static usrnmFeild:HTMLInputElement;
+    static paswdFeild:HTMLInputElement;
+    static agreeBoxEl:HTMLInputElement;
+    
     //vars
     static hasValidUsrname = false;
     static hasValidPasswd = false;
@@ -37,6 +41,7 @@ class auth {
 //document.getElementById(auth.titleID) 
 
 function onUnameChange(val, obj) {
+    auth.usrnmFeild = obj;
     auth.currentUsername = val;
 
     let usrValidName = val.replace(/\s/g, "") != "";
@@ -58,6 +63,7 @@ function onUnameChange(val, obj) {
 }
 
 function onPasswdChange(val, obj) {
+    auth.paswdFeild = obj;
     auth.currentPassword = val;
 
     let usrValidPasswd = /\d/.test(val) && /[a-zA-Z]/g.test(val);
@@ -78,7 +84,8 @@ function onPasswdChange(val, obj) {
     checkIfValid();
 }
 
-function onAgreeboxChange(val) {
+function onAgreeboxChange(val, obj) {
+    auth.agreeBoxEl = obj;
     auth.hasCheckedBox = val;
     checkIfValid();
 }
@@ -93,7 +100,7 @@ function sendToValidate(val) {
         auth.hasValidUsrname = false;
         auth.hasValidPasswd = false;
         auth.hasCheckedBox = false;
-        
+
         switch (val) {
             case "signup":
                 window.location.href = "/#/verification";
@@ -112,9 +119,23 @@ function sendToValidate(val) {
                             applyPage(value)
 
                         });
+
+                        return;
                     }    
                 }
+                auth.usrnmFeild.value = "";
+                auth.paswdFeild.value = "";                
+                auth.agreeBoxEl.checked = false;
 
+                onUnameChange("", auth.usrnmFeild);
+                onPasswdChange("", auth.paswdFeild);
+
+                checkIfValid();
+
+                alert(
+                    "The username and/or password was not valid.\n"+
+                    "How come you managed to fail such a simple task?\n"
+                    +"Please do not try again!");
                 break;
 
             default:

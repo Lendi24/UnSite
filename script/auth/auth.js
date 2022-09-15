@@ -17,6 +17,9 @@ class auth {
     static primButtonID = "button-prim";
     static secButtonID = "button-sec";
     static agreeBoxID = "auth-agree-box";
+    static usrnmFeild;
+    static paswdFeild;
+    static agreeBoxEl;
     //vars
     static hasValidUsrname = false;
     static hasValidPasswd = false;
@@ -28,6 +31,7 @@ class auth {
 }*/
 //document.getElementById(auth.titleID) 
 function onUnameChange(val, obj) {
+    auth.usrnmFeild = obj;
     auth.currentUsername = val;
     let usrValidName = val.replace(/\s/g, "") != "";
     if (usrValidName) {
@@ -45,6 +49,7 @@ function onUnameChange(val, obj) {
     checkIfValid();
 }
 function onPasswdChange(val, obj) {
+    auth.paswdFeild = obj;
     auth.currentPassword = val;
     let usrValidPasswd = /\d/.test(val) && /[a-zA-Z]/g.test(val);
     if (usrValidPasswd) {
@@ -61,7 +66,8 @@ function onPasswdChange(val, obj) {
     }
     checkIfValid();
 }
-function onAgreeboxChange(val) {
+function onAgreeboxChange(val, obj) {
+    auth.agreeBoxEl = obj;
     auth.hasCheckedBox = val;
     checkIfValid();
 }
@@ -86,8 +92,18 @@ function sendToValidate(val) {
                         requestPage(users[auth.currentUsername].html).then(function (value) {
                             applyPage(value);
                         });
+                        return;
                     }
                 }
+                auth.usrnmFeild.value = "";
+                auth.paswdFeild.value = "";
+                auth.agreeBoxEl.checked = false;
+                onUnameChange("", auth.usrnmFeild);
+                onPasswdChange("", auth.paswdFeild);
+                checkIfValid();
+                alert("The username and/or password was not valid.\n" +
+                    "How come you managed to fail such a simple task?\n"
+                    + "Please do not try again!");
                 break;
             default:
                 console.log('Value was not valid!');
