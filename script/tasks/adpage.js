@@ -23,14 +23,33 @@ class TaskAdPage extends TaskObj {
             document.getElementById("multiclick-bar").value += 5;
             if (firstRun) {
                 firstRun = false;
+                //40
                 for (let i = 0; i < 40; i++) {
                     setTimeout(() => {
                         obj.newWindow(container, imageRootFolder + obj.images[Math.floor(Math.random() * obj.images.length)], obj, 800, 500);
                     }, (1000) + 100 * i);
                 }
-                window.setInterval(function () {
-                    document.getElementById("multiclick-bar").value -= 1;
-                }, 100);
+                var interval = window.setInterval(function () {
+                    if (document.getElementById("multiclick-bar").value == 0) {
+                        document.getElementById("multiclick-button").classList.add("is-primary");
+                        document.getElementById("multiclick-button").classList.add("is-warning");
+                        document.getElementById("multiclick-button").classList.add("is-danger");
+                    }
+                    else if (document.getElementById("multiclick-bar").value == 100) {
+                        clearInterval(interval);
+                        document.getElementById("multiclick-button").classList.add("is-primary");
+                        document.getElementById("multiclick-button").classList.remove("is-warning");
+                        document.getElementById("multiclick-button").classList.remove("is-danger");
+                        document.getElementById("multiclick-button").classList.add("is-loading");
+                        setTimeout(document.getElementById("next-task-button").click, 800);
+                    }
+                    else {
+                        document.getElementById("multiclick-bar").value -= 0.1;
+                        document.getElementById("multiclick-button").classList.remove("is-primary");
+                        document.getElementById("multiclick-button").classList.add("is-warning");
+                        document.getElementById("multiclick-button").classList.remove("is-danger");
+                    }
+                }, 10);
             }
         };
     }
