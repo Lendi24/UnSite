@@ -79,13 +79,28 @@ function sendToValidate(val) {
         auth.hasValidUsrname = false;
         auth.hasValidPasswd = false;
         auth.hasCheckedBox = false;
+        let users = getLogins();
         switch (val) {
             case "signup":
-                window.location.href = "/#/verification";
+                if (users[auth.currentUsername]) {
+                    alert("A user with that name already exists!");
+                }
+                else if (auth.currentUsername.toLowerCase() == "unsite") {
+                    alert("Haha, you are so funny. Choose something else.");
+                }
+                else if (auth.currentUsername.toLowerCase() == "steve") {
+                    alert("You are not Steve, and will never, be as cool as Steve. You are clearly not steve!");
+                }
+                else if (auth.currentUsername.toLowerCase() == "admin") {
+                    alert("Hello Admin! Go to the back-end and create an account like a real admin. I will get you fired :>");
+                }
+                else {
+                    window.location.href = "/#/verification";
+                    return;
+                }
                 break;
             case "login":
-                let users = getLogins();
-                if (users[auth.currentUsername] != null) {
+                if (users[auth.currentUsername]) {
                     if (users[auth.currentUsername].passwd == auth.currentPassword) {
                         ignoreNextCall = 1;
                         window.location.href = "/#/mypage";
@@ -95,12 +110,6 @@ function sendToValidate(val) {
                         return;
                     }
                 }
-                auth.usrnmFeild.value = "";
-                auth.paswdFeild.value = "";
-                auth.agreeBoxEl.checked = false;
-                onUnameChange("", auth.usrnmFeild);
-                onPasswdChange("", auth.paswdFeild);
-                checkIfValid();
                 alert("The username and/or password was not valid.\n" +
                     "How come you managed to fail such a simple task?\n"
                     + "Please do not try again!");
@@ -109,6 +118,12 @@ function sendToValidate(val) {
                 console.log('Value was not valid!');
                 break;
         }
+        auth.usrnmFeild.value = "";
+        auth.paswdFeild.value = "";
+        auth.agreeBoxEl.checked = false;
+        onUnameChange("", auth.usrnmFeild);
+        onPasswdChange("", auth.paswdFeild);
+        checkIfValid();
     }
 }
 function clrLogins() {
