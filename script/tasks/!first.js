@@ -4,13 +4,13 @@ const tasks = {
     2: { html: "/html/tasks/email.html", js: new TaskEmailVerify("email-verify") },
     3: { html: "/html/tasks/Tos.html", js: new TaskObj("terms-of-service") },
     4: { html: "/html/tasks/not-a-robot.html", js: new TaskNotARobot("not-a-robot") },
-    0: { html: "/html/tasks/temp3.html", js: null },
-    5: { html: "/html/tasks/temp4.html", js: null },
-    6: { html: "/html/tasks/temp5.html", js: null },
-    7: { html: "/html/tasks/temp6.html", js: null },
-    8: { html: "/html/tasks/temp7.html", js: null },
-    9: { html: "/html/tasks/temp8.html", js: null },
-    10: { html: "/html/tasks/temp9.html", js: null },
+    0: { html: "/html/tasks/temp3.html", js: new TaskObj("null") },
+    5: { html: "/html/tasks/temp4.html", js: new TaskObj("null") },
+    6: { html: "/html/tasks/temp5.html", js: new TaskObj("null") },
+    7: { html: "/html/tasks/temp6.html", js: new TaskObj("null") },
+    8: { html: "/html/tasks/temp7.html", js: new TaskObj("null") },
+    9: { html: "/html/tasks/temp8.html", js: new TaskObj("null") },
+    10: { html: "/html/tasks/temp9.html", js: new TaskObj("null") },
 };
 const order = shuffle(Object.keys(tasks));
 let nextTaskButton, currentTaskNr;
