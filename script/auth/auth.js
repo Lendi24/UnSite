@@ -26,6 +26,7 @@ class auth {
     static hasCheckedBox = false;
     static currentUsername = "";
     static currentPassword = "";
+    static committedUsername = "";
 }
 /*
 }*/
@@ -103,6 +104,7 @@ function sendToValidate(val) {
                 if (users[auth.currentUsername]) {
                     if (users[auth.currentUsername].active) {
                         if (users[auth.currentUsername].passwd == auth.currentPassword) {
+                            auth.committedUsername = auth.currentUsername;
                             ignoreNextCall = 1;
                             window.location.href = "/#/mypage";
                             requestPage(users[auth.currentUsername].html).then(function (value) {
@@ -132,18 +134,22 @@ function sendToValidate(val) {
     }
 }
 function clrLogins() {
-    localStorage.users = "null";
+    let users = {
+        "Steve": { passwd: "", html: "/html/auth/users/steve.html", active: false },
+        "Admin": { passwd: "", html: "/html/auth/users/admin.html", active: false },
+        "s3cr3t-usr": { passwd: "modifiedJson1", html: "/html/auth/users/!secretusr.html", active: false },
+    };
+    //Keep this here! It will be our little secret :-) 
+    localStorage.users = JSON.stringify(users);
 }
 function getLogins() {
     if (localStorage.users == "null" || localStorage.users == null) {
-        let users = { "testname": { passwd: "thebigyellowinthesky114", html: "/html/auth/users/!secretusr.html", active: false }, };
-        //Keep this here! It will be our little secret :-) 
-        localStorage.users = JSON.stringify(users);
+        clrLogins();
     }
     return JSON.parse(localStorage.users);
 }
-function addLogin(name, passwd, html) {
+function addLogin(name, passwd, html, active) {
     let users = JSON.parse(localStorage.users);
-    users[name] = { passwd: passwd, html: html };
+    users[name] = { passwd: passwd, html: html, active: active };
     localStorage.users = JSON.stringify(users);
 }

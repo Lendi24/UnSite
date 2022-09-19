@@ -1,7 +1,7 @@
 'use strict';
 
 const endingScreen = {
-    html: "/html/tasks/¡last-user-success.html",            js: new TaskObj("end")
+    html: "/html/tasks/¡last.html",              js: new TasksAreDone("Verified!")
 }
 
 const tasks = [
