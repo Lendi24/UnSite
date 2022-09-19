@@ -5,11 +5,12 @@
             <h2 class="subtitle">UnSite-Automated-Replicable-Attention-Test</h2>    
         </header>
         <div class="is-flex">
-            <progress class="progress is-info m-auto" value="0" max="100"></progress>
-            <div class="is-flex is-flex-direction-row-reverse">
-                <button class="button is-primary m-2">Proceed</button>
-                <button class="button is-danger  m-2">Cancel</button>
+            <progress class="progress is-info m-auto" value="0" max="100" id="bar"></progress>
+            <div class="is-flex is-flex-direction-row-reverse" id="button-contain">
+                <button class="button is-primary m-2" id="next">Proceed</button>
+                <button class="button is-danger  m-2" id="prev">Cancel</button>
             </div>
         </div>
     </div>
 </div>
+<button id="next-task-button" class="is-hidden"></button>
