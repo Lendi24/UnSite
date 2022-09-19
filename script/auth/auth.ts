@@ -128,18 +128,24 @@ function sendToValidate(val) {
 
             case "login":
                 if (users[auth.currentUsername]) {
-                    if (users[auth.currentUsername].passwd == auth.currentPassword) {
+                    if (users[auth.currentUsername].active) {
+                        if (users[auth.currentUsername].passwd == auth.currentPassword) {
 
-                        ignoreNextCall = 1;
-                        window.location.href = "/#/mypage";
+                            ignoreNextCall = 1;
+                            window.location.href = "/#/mypage";
+    
+                            requestPage(users[auth.currentUsername].html).then( function(value) {
+                                applyPage(value)
+    
+                            });
+    
+                            return;
+                        }        
+                    }
 
-                        requestPage(users[auth.currentUsername].html).then( function(value) {
-                            applyPage(value)
-
-                        });
-
-                        return;
-                    }    
+                    else {
+                        alert("This user is not activated!");
+                    }
                 }
 
                 alert(
@@ -166,14 +172,13 @@ function sendToValidate(val) {
 }
 
 function clrLogins() {
-    localStorage.users = "null" || localStorage.users == null;
+    localStorage.users = "null";
 }
 
 function getLogins() {
-    if (localStorage.users == "null") {
-        let users = {"testname": { passwd: "thebigyellowinthesky114",  html: "/html/auth/users/!secretusr.html"}, }
-            //Keep this here! It will be our little secret :-) 
-            
+    if (localStorage.users == "null" || localStorage.users == null) {
+        let users = {"testname": { passwd: "thebigyellowinthesky114",  html: "/html/auth/users/!secretusr.html", active: false}, }
+        //Keep this here! It will be our little secret :-) 
         localStorage.users = JSON.stringify(users);
     }         
 
