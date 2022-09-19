@@ -11,6 +11,7 @@ const tasks = {
     8: { html: "/html/tasks/temp7.html", js: new TaskObj("task-temp") },
     9: { html: "/html/tasks/temp8.html", js: new TaskObj("task-temp") },
     10: { html: "/html/tasks/temp9.html", js: new TaskObj("task-temp") },
+    11: { html: "/html/tasks/wall-of-buttons.html", js: new TaskWallOfButtons("task-temp") },
 };
 const order = shuffle(Object.keys(tasks));
 let nextTaskButton, currentTaskNr;
