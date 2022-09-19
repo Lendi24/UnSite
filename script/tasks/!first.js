@@ -1,17 +1,16 @@
 'use strict';
 const tasks = {
-    0: { html: "/html/tasks/Tos.html", js: new TaskObj("task-temp") },
-    1: { html: "/html/tasks/not-a-robot.html", js: new TaskNotARobot("not-a-robot") },
-    2: { html: "/html/tasks/temp1.html", js: new TaskTemp1("task-temp-1") },
-    3: { html: "/html/tasks/temp2.html", js: new TaskObj("task-temp") },
-    4: { html: "/html/tasks/temp3.html", js: new TaskObj("task-temp") },
-    5: { html: "/html/tasks/temp4.html", js: new TaskObj("task-temp") },
-    6: { html: "/html/tasks/temp5.html", js: new TaskObj("task-temp") },
-    7: { html: "/html/tasks/temp6.html", js: new TaskObj("task-temp") },
-    8: { html: "/html/tasks/temp7.html", js: new TaskObj("task-temp") },
-    9: { html: "/html/tasks/temp8.html", js: new TaskObj("task-temp") },
-    10: { html: "/html/tasks/temp9.html", js: new TaskObj("task-temp") },
-    11: { html: "/html/tasks/wall-of-buttons.html", js: new TaskWallOfButtons("task-temp") },
+    1: { html: "/html/tasks/adpage.html", js: new TaskAdPage("ad-page") },
+    2: { html: "/html/tasks/email.html", js: new TaskEmailVerify("email-verify") },
+    3: { html: "/html/tasks/Tos.html", js: new TaskObj("terms-of-service") },
+    4: { html: "/html/tasks/not-a-robot.html", js: new TaskNotARobot("not-a-robot") },
+    5: { html: "/html/tasks/wall-of-buttons.html", js: new TaskWallOfButtons("task-temp") },
+    0: { html: "/html/tasks/temp3.html", js: null },
+    6: { html: "/html/tasks/temp5.html", js: null },
+    7: { html: "/html/tasks/temp6.html", js: null },
+    8: { html: "/html/tasks/temp7.html", js: null },
+    9: { html: "/html/tasks/temp8.html", js: null },
+    10: { html: "/html/tasks/temp9.html", js: null },
 };
 const order = shuffle(Object.keys(tasks));
 let nextTaskButton, currentTaskNr;

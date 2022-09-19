@@ -8,6 +8,8 @@ class auth {
     hasValidUsrname;
     hasValidPasswd;
     hasCheckedBox;
+    currentUsername;
+    currentPassword;
     //text to hide or unhide if feild is correct
     static userWarnTexID = "usr-warn-name";
     static paswWarnTexID = "usr-warn-psw";
@@ -15,15 +17,22 @@ class auth {
     static primButtonID = "button-prim";
     static secButtonID = "button-sec";
     static agreeBoxID = "auth-agree-box";
+    static usrnmFeild;
+    static paswdFeild;
+    static agreeBoxEl;
     //vars
     static hasValidUsrname = false;
     static hasValidPasswd = false;
     static hasCheckedBox = false;
+    static currentUsername = "";
+    static currentPassword = "";
 }
 /*
 }*/
 //document.getElementById(auth.titleID) 
 function onUnameChange(val, obj) {
+    auth.usrnmFeild = obj;
+    auth.currentUsername = val;
     let usrValidName = val.replace(/\s/g, "") != "";
     if (usrValidName) {
         document.getElementById(auth.userWarnTexID).style.display = "none";
@@ -40,6 +49,8 @@ function onUnameChange(val, obj) {
     checkIfValid();
 }
 function onPasswdChange(val, obj) {
+    auth.paswdFeild = obj;
+    auth.currentPassword = val;
     let usrValidPasswd = /\d/.test(val) && /[a-zA-Z]/g.test(val);
     if (usrValidPasswd) {
         document.getElementById(auth.paswWarnTexID).style.display = "none";
@@ -55,18 +66,64 @@ function onPasswdChange(val, obj) {
     }
     checkIfValid();
 }
-function onAgreeboxChange(val) {
+function onAgreeboxChange(val, obj) {
+    auth.agreeBoxEl = obj;
     auth.hasCheckedBox = val;
     checkIfValid();
 }
 function checkIfValid() {
     document.getElementById(auth.primButtonID).disabled = !(auth.hasValidUsrname && auth.hasValidPasswd && auth.hasCheckedBox);
 }
-function sendToValidate() {
+function sendToValidate(val) {
     if (auth.hasValidUsrname && auth.hasValidPasswd && auth.hasCheckedBox) {
         auth.hasValidUsrname = false;
         auth.hasValidPasswd = false;
         auth.hasCheckedBox = false;
-        window.location.href = "/#/verification";
+        switch (val) {
+            case "signup":
+                window.location.href = "/#/verification";
+                break;
+            case "login":
+                let users = getLogins();
+                if (users[auth.currentUsername] != null) {
+                    if (users[auth.currentUsername].passwd == auth.currentPassword) {
+                        ignoreNextCall = 1;
+                        window.location.href = "/#/mypage";
+                        requestPage(users[auth.currentUsername].html).then(function (value) {
+                            applyPage(value);
+                        });
+                        return;
+                    }
+                }
+                auth.usrnmFeild.value = "";
+                auth.paswdFeild.value = "";
+                auth.agreeBoxEl.checked = false;
+                onUnameChange("", auth.usrnmFeild);
+                onPasswdChange("", auth.paswdFeild);
+                checkIfValid();
+                alert("The username and/or password was not valid.\n" +
+                    "How come you managed to fail such a simple task?\n"
+                    + "Please do not try again!");
+                break;
+            default:
+                console.log('Value was not valid!');
+                break;
+        }
     }
+}
+function clrLogins() {
+    localStorage.users = "null" || localStorage.users == null;
+}
+function getLogins() {
+    if (localStorage.users == "null") {
+        let users = { "testname": { passwd: "thebigyellowinthesky114", html: "/html/auth/users/!secretusr.html" }, };
+        //Keep this here! It will be our little secret :-) 
+        localStorage.users = JSON.stringify(users);
+    }
+    return JSON.parse(localStorage.users);
+}
+function addLogin(name, passwd, html) {
+    let users = JSON.parse(localStorage.users);
+    users[name] = { passwd: passwd, html: html };
+    localStorage.users = JSON.stringify(users);
 }

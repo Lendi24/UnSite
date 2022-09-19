@@ -1,10 +1,9 @@
-var deb;
-
 class TaskNotARobot extends TaskObj {
   taskLogic() {
     console.log("yo");
     var box, button, done, hint;    
     var triesBeforeHint = 10;
+    const obj = this;
 
     done = false;
     box = document.getElementById("box");
@@ -12,9 +11,7 @@ class TaskNotARobot extends TaskObj {
     hint = document.getElementById("hint-text");
     console.log(this);
 
-    deb = this;
-
-    deb.CenterElm(box);
+    obj.CenterElm(box);
     
 
     box.onmouseenter = function () {
@@ -22,10 +19,10 @@ class TaskNotARobot extends TaskObj {
         if (triesBeforeHint > 0) {
           triesBeforeHint--;
         } else if (triesBeforeHint == 0) {
-          hint.innerHTML = "<br>Psst!<br>Have you tried resizing the window?";
+          hint.innerHTML = "<br>Not working for you?<br>Hmm.. You must be doing it wrong";
         }
 
-        deb.RandomPos(box);
+        obj.RandomPos(box);
         setTimeout(() => {}, 10);
       }
     };
@@ -42,12 +39,12 @@ class TaskNotARobot extends TaskObj {
     };
 
     window.onresize = function () {
-        deb.CenterElm(box);
+        obj.CenterElm(box);
     };
   }
 
   CenterElm(elm) {
-    elm.style.left   = (window.innerWidth / 2 - elm.clientWidth / 2).toString() + "px";
+    elm.style.left   = (window.innerWidth  / 2 - elm.clientWidth  / 2).toString() + "px";
     elm.style.bottom = (window.innerHeight / 2 - elm.clientHeight / 2).toString() + "px";
   }
 
