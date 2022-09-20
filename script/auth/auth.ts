@@ -102,7 +102,7 @@ function sendToValidate(val) {
         auth.hasValidUsrname = false;
         auth.hasValidPasswd = false;
         auth.hasCheckedBox = false;
-        let users = getLogins();
+        let users = getUsers();
 
         switch (val) {
             case "signup":
@@ -123,6 +123,8 @@ function sendToValidate(val) {
                 }
                 
                 else {
+                    auth.committedUsername = auth.currentUsername;
+                    addUser(auth.currentUsername, auth.currentPassword, "/html/auth/users/user.html", false);
                     window.location.href = "/#/verification";
                     return;
                 } 
@@ -133,7 +135,6 @@ function sendToValidate(val) {
                     if (users[auth.currentUsername].active) {
                         if (users[auth.currentUsername].passwd == auth.currentPassword) {
 
-                            auth.committedUsername = auth.currentUsername;
                             ignoreNextCall = 1;
                             window.location.href = "/#/mypage";
     
@@ -184,7 +185,7 @@ function clrLogins() {
     localStorage.users = JSON.stringify(users);
 }
 
-function getLogins() {
+function getUsers() {
     if (localStorage.users == "null" || localStorage.users == null) {
         clrLogins()
     }         
@@ -192,12 +193,31 @@ function getLogins() {
     return JSON.parse(localStorage.users);
 }
 
-function addLogin(name, passwd, html, active) {
-    let users = JSON.parse(localStorage.users);
+function getUser(name){
+    return getUsers()[name];
+}
+
+function addUser(name, passwd, html, active) {
+    let users = getUsers();
     users[name] = {passwd: passwd, html: html, active: active}
 
     localStorage.users = JSON.stringify(users);
 }
 
+function updateUser(name, user){
+    let users = getUsers();
+    console.log(user);
+    users[name].passwd = user.passwd,
+    users[name].html = user.html,
+    users[name].active = user.active,
+
+    localStorage.users = JSON.stringify(users);
+}
+
+function activateUser(name) {
+    var updatedUser = getUser(name);
+    updatedUser.active = true;
+    updateUser(name, updatedUser);
+}
 
 

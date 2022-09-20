@@ -43,18 +43,19 @@ class TasksAreDone extends TaskObj {
                                         "\nTrying to catch bugs, huh?\n\n"+
                                         "Why don't you try again, the proper way?";
                 mainButton.innerText = "I am a cheating bastard! Take me back!";
-                mainButton.href = "I am a cheating bastard! Take me back!";
+                mainButton.href = "/#/signup";
                 break;
 //Well, I've seen how you do tasks. You probably forgot your password, didn't you?
             default: //Default assumes the account is correct.
-                maintitle.innerText = "Account verified!";
+                maintitle.innerText = "Account almost verified!";
                 subtitle.innerText =    "Please login with your credentials\n"+
                                         "Hope you didn't forget your password!";
-                mainButton.innerText = "Take me to 'login'";
+                mainButton.innerText = "Take me to 'login' and activate my account";
                 mainButton.href = "/#/signin/";
+                mainButton.onclick = function() {activateUser(auth.committedUsername)};
                 secdButton.classList.remove("is-hidden");
                 secdButton.innerText = "I don't remember my password"
-                secdButton.onclick = function() {alert("**UnSiteAccount**\nUsername: 'Steve',\nPassword: 'NaN',")}
+                secdButton.onclick = function() {alert("**UnSiteAccount**\nUsername: '"+auth.committedUsername+"',\nPassword: '"+"dw"+"',")}
 
                 console.log("re")
 
