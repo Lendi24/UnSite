@@ -14,6 +14,7 @@ const tasks = [
 
 
     { html: "/html/tasks/temp6.html",           js: new TaskObj("null") },
+    { html: "/html/tasks/trollbutton.html",     js: new TaskTrollButton("troll-button") },
 /*
 
     { html: "/html/tasks/temp6.html",            js: new TaskObj("null") },
