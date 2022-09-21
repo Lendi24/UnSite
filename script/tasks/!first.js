@@ -1,22 +1,28 @@
 'use strict';
-const tasks = {
-    1: { html: "/html/tasks/adpage.html", js: new TaskAdPage("ad-page") },
-    2: { html: "/html/tasks/email.html", js: new TaskEmailVerify("email-verify") },
-    3: { html: "/html/tasks/Tos.html", js: new TaskObj("terms-of-service") },
-    4: { html: "/html/tasks/not-a-robot.html", js: new TaskNotARobot("not-a-robot") },
-    5: { html: "/html/tasks/wall-of-buttons.html", js: new TaskWallOfButtons("wall-of-buttons") },
-    6: { html: "/html/tasks/next-button.html", js: new TaskNextButton("next-button-task") },
-    0: { html: "/html/tasks/temp6.html", js: new TaskObj("null") },
-    7: { html: "/html/tasks/temp6.html", js: new TaskObj("null") },
-    8: { html: "/html/tasks/temp7.html", js: new TaskObj("null") },
-    9: { html: "/html/tasks/temp8.html", js: new TaskObj("null") },
-    10: { html: "/html/tasks/temp9.html", js: new TaskObj("null") },
+const endingScreen = {
+    html: "/html/tasks/¡last.html", js: new TasksAreDone("Verified!")
 };
-const order = shuffle(Object.keys(tasks));
+const tasks = [
+    { html: "/html/tasks/adpage.html", js: new TaskAdPage("ad-page") },
+    { html: "/html/tasks/email.html", js: new TaskEmailVerify("email-verify") },
+    { html: "/html/tasks/Tos.html", js: new TaskObj("terms-of-service") },
+    { html: "/html/tasks/not-a-robot.html", js: new TaskNotARobot("not-a-robot") },
+    { html: "/html/tasks/wall-of-buttons.html", js: new TaskWallOfButtons("wall-of-buttons") },
+    { html: "/html/tasks/next-button.html", js: new TaskNextButton("next-button-task") },
+    { html: "/html/tasks/temp6.html", js: new TaskObj("null") },
+    /*
+    
+        { html: "/html/tasks/temp6.html",            js: new TaskObj("null") },
+        { html: "/html/tasks/temp7.html",            js: new TaskObj("null") },
+        { html: "/html/tasks/temp8.html",            js: new TaskObj("null") },
+        { html: "/html/tasks/temp9.html",            js: new TaskObj("null") },*/
+];
+const taskInOrder = shuffle(tasks);
+taskInOrder.push(endingScreen);
 let nextTaskButton, currentTaskNr;
 function loadTask(taskNr) {
-    let currentTaskJS = (tasks[order[taskNr]].js);
-    requestPage(tasks[order[taskNr]].html).then(function (value) {
+    let currentTaskJS = (taskInOrder[taskNr].js);
+    requestPage(taskInOrder[taskNr].html).then(function (value) {
         applyPage(value);
         nextTaskButton = document.getElementById("next-task-button");
         nextTaskButton.onclick = function () {
