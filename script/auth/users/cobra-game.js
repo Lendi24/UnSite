@@ -11,6 +11,7 @@ class CobraGame extends TaskObj {
         let timeBetweenTicks = 100;
         let snake = [{ x: 0, y: 2 }, { x: 1, y: 2 }, { x: 2, y: 2 },];
         let fruit = [];
+        let timmer;
         let movingDirOld = { x: 1, y: 0 };
         let movingDir = { x: 1, y: 0 };
         let collectedFruits = 0;
@@ -43,6 +44,26 @@ class CobraGame extends TaskObj {
                     break;
             }
         });
+        startGame();
+        function startGame() {
+            for (let y = 0; y <= pixelsInY; y++) {
+                for (let x = 0; x <= pixelsInX; x++) {
+                    setTimeout(function () {
+                        clearPixel(x, y);
+                    }, 500 + (y + x) * 15);
+                }
+            }
+            timeBetweenTicks = 100;
+            snake = [{ x: 0, y: 2 }, { x: 1, y: 2 }, { x: 2, y: 2 },];
+            fruit = [];
+            movingDirOld = { x: 1, y: 0 };
+            movingDir = { x: 1, y: 0 };
+            collectedFruits = 0;
+            score = 0;
+            setTimeout(function () {
+                timmer = setInterval(mainUpdate, timeBetweenTicks);
+            }, 500 + (pixelsInY + pixelsInX) * 15);
+        }
         function endGame(message) {
             clearInterval(timmer);
             for (let y = 0; y <= pixelsInY; y++) {
@@ -52,19 +73,12 @@ class CobraGame extends TaskObj {
                     }, 250 + (y + x) * 15);
                 }
             }
-            for (let y = 0; y <= pixelsInY; y++) {
-                for (let x = 0; x <= pixelsInX; x++) {
-                    setTimeout(function () {
-                        clearPixel(x, y);
-                    }, 500 + (y + x) * 15);
-                }
-            }
             setTimeout(function () {
-                new CobraGame("yo").taskLogic();
-            }, 1000);
+                //new CobraGame("yo").taskLogic();
+                startGame();
+            }, (pixelsInY + pixelsInX) * 15);
             console.log(message);
         }
-        let timmer = setInterval(mainUpdate, timeBetweenTicks);
         function mainUpdate() {
             //ControlsLogic 
             movingDirOld = movingDir;
@@ -122,7 +136,7 @@ class CobraGame extends TaskObj {
                             invalidPos = true;
                         }
                     });
-                } while (invalidPos && tried < snake.length);
+                } while (invalidPos && tried < snake.length + 10);
                 fruit.push(newFruit);
                 placePixel(newFruit.x, newFruit.y);
                 console.log(newFruit.x + ":" + newFruit.y);
