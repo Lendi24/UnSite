@@ -139,8 +139,9 @@ function sendToValidate(val) {
                             window.location.href = "/#/mypage";
     
                             requestPage(users[auth.currentUsername].html).then( function(value) {
-                                applyPage(value)
-    
+                                applyPage(value);
+                                let jsObj = new CobraGame("cobra-game")
+                                jsObj.taskLogic();
                             });
     
                             return;
