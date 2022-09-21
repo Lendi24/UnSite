@@ -122,7 +122,7 @@ class CobraGame extends TaskObj {
                             invalidPos = true;
                         }
                     });
-                } while (invalidPos && tried < 15);
+                } while (invalidPos && tried < snake.length);
                 fruit.push(newFruit);
                 placePixel(newFruit.x, newFruit.y);
                 console.log(newFruit.x + ":" + newFruit.y);

@@ -147,7 +147,7 @@ class CobraGame extends TaskObj {
                             invalidPos = true;
                         }
                     });
-                } while (invalidPos && tried < 15);
+                } while (invalidPos && tried < snake.length);
 
                 fruit.push(newFruit);
 
