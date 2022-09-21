@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/tools/bulma.css">
+    <script defer src="/script/tasks/review-page.js"></script>
     <title>Document</title>
 </head>
 
@@ -17,36 +18,36 @@
 
                 <div class="field mb-auto container">
                     <div class="meow">
-                        <p class="title is-6 mb-auto m-4">IQ Level</p>
-                        <input class="slider is-fullwidth" step="1" min="0" max="100" value="100" type="range">
+                        <p class="title is-6 mb-auto m-4" >IQ Level</p>
+                        <input class="slider is-fullwidth" id="IQ" step="1" min="0" max="100" value="100" type="range">
                     </div>
 
                     <div>
-                        <p class="title is-6 mb-auto m-4">Brain Capacity</p>
-                        <input class="slider is-fullwidth" step="1" min="0" max="100" value="100" type="range">
+                        <p class="title is-6 mb-auto m-4" >Brain Capacity</p>
+                        <input class="slider is-fullwidth" id="brain" step="1" min="0" max="100" value="100" type="range">
                     </div>
 
                     <div>
-                        <p class="title is-6 mb-auto m-4">Strenght</p>
-                        <input class="slider is-fullwidth" step="1" min="0" max="100" value="100" type="range">
+                        <p class="title is-6 mb-auto m-4" >Strenght</p>
+                        <input class="slider is-fullwidth" id="strenght" step="1" min="0" max="100" value="100" type="range">
                     </div>
 
                     <div>
-                        <p class="title is-6 mb-auto m-4">Height</p>
-                        <input class="slider is-fullwidth" step="1" min="0" max="100" value="100" type="range">
+                        <p class="title is-6 mb-auto m-4" >Height</p>
+                        <input class="slider is-fullwidth" id="height" step="1" min="0" max="100" value="100" type="range">
                     </div>
 
                     <div>
-                        <p class="title is-6 mb-auto m-4">Smelliness</p>
-                        <input class="slider is-fullwidth" step="1" min="0" max="100" value="100" type="range">
+                        <p class="title is-6 mb-auto m-4" >Smelliness</p>
+                        <input class="slider is-fullwidth" id="smell" step="1" min="0" max="100" value="100" type="range">
                     </div>
 
                     <div>
-                        <p class="title is-6 mb-auto m-4">Successfullness</p>
-                        <input class="slider is-fullwidth" step="1" min="0" max="100" value="100" type="range">
+                        <p class="title is-6 mb-auto m-4" >Successfullness</p>
+                        <input class="slider is-fullwidth" id="success" step="1" min="0" max="100" value="100" type="range">
                     </div>
 
-                    <button class="button is-danger mt-5" id="perfectlyBalancedButton">Submit</button>
+                    <button disabled class="button is-danger mt-5 is-light" id="next-task-button">Submit</button>
                 </div>
 
 
