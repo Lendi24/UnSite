@@ -8,6 +8,8 @@ class CobraGame extends TaskObj {
     pixelsInY = Math.floor(this.canvas.height / this.pixelSize) -1;
     pixelsInX = Math.floor(this.canvas.width  / this.pixelSize) -1;
 
+    score = 0;
+
     taskLogic(obj){        
         let timeBetweenTicks = 100;
 
@@ -18,7 +20,6 @@ class CobraGame extends TaskObj {
         let movingDirOld = {x:1, y:0}
         let movingDir    = {x:1,y:0};
         let collectedFruits = 0;
-        let score = 0;
 
         //clearPixel(0,0);
         document.getElementById("spa-root").addEventListener("keydown", (e) => {
@@ -56,6 +57,7 @@ class CobraGame extends TaskObj {
 
         startGame(this);
         function startGame(obj) {
+            obj.scoreChanged(0);
             for (let y = 0; y <= obj.pixelsInY; y++) {
                 for (let x = 0; x <= obj.pixelsInX; x++) {
                     setTimeout(function(){
@@ -72,7 +74,7 @@ class CobraGame extends TaskObj {
             movingDirOld = {x:1, y:0}
             movingDir    = {x:1,y:0};
             collectedFruits = 0;
-            score = 0;
+            obj.score = 0;
     
             setTimeout(function(){
                 timmer = setInterval(function() {mainUpdate(obj)}, timeBetweenTicks)
@@ -113,11 +115,7 @@ class CobraGame extends TaskObj {
 
             else {
                 collectedFruits--;
-                score++;
-                document.getElementById("cobra-score").innerText = score.toString();
-                if (parseInt(document.getElementById("cobra-high").innerText)<score) {
-                    document.getElementById("cobra-high").innerText = score.toString();
-                }
+                obj.scoreChanged(++obj.score);
             }
 
             //SnakeMove - Adding block in movingDir
