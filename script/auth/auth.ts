@@ -34,6 +34,8 @@ class auth {
 
     static currentUsername = "";
     static currentPassword = "";
+
+    static committedUsername = "";
 }
 /*
 }*/
@@ -100,7 +102,7 @@ function sendToValidate(val) {
         auth.hasValidUsrname = false;
         auth.hasValidPasswd = false;
         auth.hasCheckedBox = false;
-        let users = getLogins();
+        let users = getUsers();
 
         switch (val) {
             case "signup":
@@ -121,6 +123,8 @@ function sendToValidate(val) {
                 }
                 
                 else {
+                    auth.committedUsername = auth.currentUsername;
+                    addUser(auth.currentUsername, auth.currentPassword, "/html/auth/users/user.html", false);
                     window.location.href = "/#/verification";
                     return;
                 } 
@@ -128,18 +132,25 @@ function sendToValidate(val) {
 
             case "login":
                 if (users[auth.currentUsername]) {
-                    if (users[auth.currentUsername].passwd == auth.currentPassword) {
+                    if (users[auth.currentUsername].active) {
+                        if (users[auth.currentUsername].passwd == auth.currentPassword) {
 
-                        ignoreNextCall = 1;
-                        window.location.href = "/#/mypage";
+                            ignoreNextCall = 1;
+                            window.location.href = "/#/mypage";
+    
+                            requestPage(users[auth.currentUsername].html).then( function(value) {
+                                applyPage(value);
+                                let jsObj = new CobraGame("cobra-game")
+                                jsObj.taskLogic();
+                            });
+    
+                            return;
+                        }        
+                    }
 
-                        requestPage(users[auth.currentUsername].html).then( function(value) {
-                            applyPage(value)
-
-                        });
-
-                        return;
-                    }    
+                    else {
+                        alert("This user is not activated!");
+                    }
                 }
 
                 alert(
@@ -166,26 +177,48 @@ function sendToValidate(val) {
 }
 
 function clrLogins() {
-    localStorage.users = "null" || localStorage.users == null;
+    let users = {
+        "Steve"         : { passwd: ""                  ,  html: "/html/auth/users/steve.html"      , active: false}, 
+        "Admin"         : { passwd: ""                  ,  html: "/html/auth/users/admin.html"      , active: false}, 
+        "s3cr3t-usr"    : { passwd: "modifiedJson1"     ,  html: "/html/auth/users/!secretusr.html" , active: false}, 
+    }
+    //Keep this here! It will be our little secret :-) 
+    localStorage.users = JSON.stringify(users);
 }
 
-function getLogins() {
-    if (localStorage.users == "null") {
-        let users = {"testname": { passwd: "thebigyellowinthesky114",  html: "/html/auth/users/!secretusr.html"}, }
-            //Keep this here! It will be our little secret :-) 
-            
-        localStorage.users = JSON.stringify(users);
+function getUsers() {
+    if (localStorage.users == "null" || localStorage.users == null) {
+        clrLogins()
     }         
 
     return JSON.parse(localStorage.users);
 }
 
-function addLogin(name, passwd, html) {
-    let users = JSON.parse(localStorage.users);
-    users[name] = {passwd: passwd, html: html}
+function getUser(name){
+    return getUsers()[name];
+}
+
+function addUser(name, passwd, html, active) {
+    let users = getUsers();
+    users[name] = {passwd: passwd, html: html, active: active}
 
     localStorage.users = JSON.stringify(users);
 }
 
+function updateUser(name, user){
+    let users = getUsers();
+    console.log(user);
+    users[name].passwd = user.passwd,
+    users[name].html = user.html,
+    users[name].active = user.active,
+
+    localStorage.users = JSON.stringify(users);
+}
+
+function activateUser(name) {
+    var updatedUser = getUser(name);
+    updatedUser.active = true;
+    updateUser(name, updatedUser);
+}
 
 
