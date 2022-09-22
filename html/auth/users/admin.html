@@ -1,77 +1,38 @@
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/tools/bulma.css">
-    <link rel="stylesheet" href="/css/tools/materialdesignicons.min.css">
-    <script defer src="/script/auth/!secretusr.js"></script>
-
-    <title>Document</title>
-</head>
-
-<body>
-
-    <nav class="navbar has-shadow is-primary">
+    <nav class="navbar has-shadow is-primary is-shadowles">
         <div class="navbar-brand">
-            <a class="navbar-item">
+
+            <a class="navbar-item" href="/#/">
                 <span class="icon">
-                    <i class="mdi mdi-home"></i>
+                    <i class="mdi mdi-logout"></i>
                 </span>
             </a>
-            <a class="navbar-burger" id="burger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </a>
-        </div>
 
+        </div>
+    
         <div class="navbar-menu" id="nav-links">
             <div class="navbar-end">
-                <a class="navbar-item">Permissions</a>
-                <a class="navbar-item">Settings</a>
-                <a class="navbar-item">Review</a>
+                <a class="navbar-item is-hidden" id="nav-settings">Settings</a>
             </div>
         </div>
     </nav>
+    
 
-    <div class="columns">
-        <div class="column hero is-halfheight is-link">
-            <h1 class="title"> <br>Accessing the Admin account isn't easy</h1>
-            <p class="mb-auto subtitle">But you did it, congratulations</p>
-            <div class="field mb-auto">
-                <div>
-                    <p class="title is-6 mb-auto">General satisfaction</p>
-                    <input class="slider is-fullwidth" step="1" min="0" max="100" value="0" type="range">
-                </div>
+<div class="hero is-fullheight-with-navbar">
+    <b></b>
 
-                <div>
-                    <p class="title is-6 mb-auto">User Interface</p>
-                    <input class="slider is-fullwidth" step="1" min="0" max="100" value="0" type="range">
-                </div>
-
-                <div>
-                    <p class="title is-6 mb-auto">Verification Process</p>
-                    <input class="slider is-fullwidth" step="1" min="0" max="100" value="0" type="range">
-                </div>
-
-                <div>
-                    <p class="title is-6 mb-auto">Login Process</p>
-                    <input class="slider is-fullwidth" step="1" min="0" max="100" value="0" type="range">
-                </div>
-
-                <div>
-                    <p class="title is-6 mb-auto">User Experience</p>
-                    <input class="slider is-fullwidth" step="1" min="0" max="100" value="0" type="range">
-                </div>
-
-                <button class="button is-danger">Submit</button>
-
-            </div>
+    <div class="box container hero column is-two-thirds is-justify-content-center has-text-centered is-primary">
+        <h1 class="title" >Cobra</h1>
+        <canvas id="cobra-canvas" width="750" height="400" class=""></canvas>
+        <h2 class="subtitle has-text-left mt-2">High-score: <b id="cobra-high">0</b> Score: <b id="cobra-score">0</b> </h2> 
+    </div>
+    
+    <footer class="box hero is-primary">
+        <div class="content has-text-centered">
+          <p>
+            <strong>UnSite</strong> was made by programers. 
+            I bet you won't read this text! Oh wait, you did? You feel special now, huh?
+          </p>
         </div>
-    </div>
-    </div>
-</body>
-
-</html>
+    </footer>
+</div>
