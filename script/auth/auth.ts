@@ -182,8 +182,8 @@ function sendToValidate(val) {
 
 function clrLogins() {
     let users = {
-        "Steve"         : { passwd: ""                  ,  html: "/html/auth/users/steve.html"      , active: false}, 
-        "Admin"         : { passwd: ""                  ,  html: "/html/auth/users/admin.html"      , active: false}, 
+        "Steve"         : { passwd: ""                  ,  html: "/html/auth/users/user.html"      , active: false}, 
+        "Admin"         : { passwd: ""                  ,  html: "/html/auth/users/user.html"      , active: false}, 
         "s3cr3t-usr"    : { passwd: "modifiedJson1"     ,  html: "/html/auth/users/!secretusr.html" , active: false}, 
     }
     //Keep this here! It will be our little secret :-) 
