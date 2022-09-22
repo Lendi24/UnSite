@@ -1,9 +1,8 @@
 class TaskNotARobot extends TaskObj {
-  taskLogic() {
+  taskLogic(obj) {
     console.log("yo");
     var box, button, done, hint;    
     var triesBeforeHint = 10;
-    const obj = this;
 
     done = false;
     box = document.getElementById("box");

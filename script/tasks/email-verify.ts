@@ -4,8 +4,7 @@ class TaskEmailVerify extends TaskObj {
   verificationCodeBinary: string;
   verificationCodeDecimal: number;
 
-  taskLogic() {
-    const obj = this;
+  taskLogic(obj) {
 
     obj.verificationCodeBinary = obj.generateRandomBinary(12);
     obj.verificationCodeDecimal = parseInt(obj.verificationCodeBinary, 2);

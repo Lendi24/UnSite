@@ -28,7 +28,7 @@ function loadTask(taskNr) {
         nextTaskButton.onclick = function () {
             loadTask(++taskNr);
         };
-        currentTaskJS.taskLogic();
+        currentTaskJS.initLogic();
     });
 }
 /*
