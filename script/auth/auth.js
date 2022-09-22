@@ -26,6 +26,7 @@ class auth {
     static hasCheckedBox = false;
     static currentUsername = "";
     static currentPassword = "";
+    static committedUsername = "";
 }
 /*
 }*/
@@ -79,28 +80,46 @@ function sendToValidate(val) {
         auth.hasValidUsrname = false;
         auth.hasValidPasswd = false;
         auth.hasCheckedBox = false;
+        let users = getUsers();
         switch (val) {
             case "signup":
-                window.location.href = "/#/verification";
+                if (users[auth.currentUsername]) {
+                    alert("A user with that name already exists!");
+                }
+                else if (auth.currentUsername.toLowerCase() == "unsite") {
+                    alert("Haha, you are so funny. Choose something else.");
+                }
+                else if (auth.currentUsername.toLowerCase() == "steve") {
+                    alert("You are not Steve, and will never, be as cool as Steve. You are clearly not steve!");
+                }
+                else if (auth.currentUsername.toLowerCase() == "admin") {
+                    alert("Hello Admin! Go to the back-end and create an account like a real admin. I will get you fired :>");
+                }
+                else {
+                    auth.committedUsername = auth.currentUsername;
+                    addUser(auth.currentUsername, auth.currentPassword, "/html/auth/users/user.html", false);
+                    window.location.href = "/#/verification";
+                    return;
+                }
                 break;
             case "login":
-                let users = getLogins();
-                if (users[auth.currentUsername] != null) {
-                    if (users[auth.currentUsername].passwd == auth.currentPassword) {
-                        ignoreNextCall = 1;
-                        window.location.href = "/#/mypage";
-                        requestPage(users[auth.currentUsername].html).then(function (value) {
-                            applyPage(value);
-                        });
-                        return;
+                if (users[auth.currentUsername]) {
+                    if (users[auth.currentUsername].active) {
+                        if (users[auth.currentUsername].passwd == auth.currentPassword) {
+                            ignoreNextCall = 1;
+                            window.location.href = "/#/mypage";
+                            requestPage(users[auth.currentUsername].html).then(function (value) {
+                                applyPage(value);
+                                let jsObj = new CobraGame("cobra-game");
+                                jsObj.taskLogic();
+                            });
+                            return;
+                        }
+                    }
+                    else {
+                        alert("This user is not activated!");
                     }
                 }
-                auth.usrnmFeild.value = "";
-                auth.paswdFeild.value = "";
-                auth.agreeBoxEl.checked = false;
-                onUnameChange("", auth.usrnmFeild);
-                onPasswdChange("", auth.paswdFeild);
-                checkIfValid();
                 alert("The username and/or password was not valid.\n" +
                     "How come you managed to fail such a simple task?\n"
                     + "Please do not try again!");
@@ -109,21 +128,47 @@ function sendToValidate(val) {
                 console.log('Value was not valid!');
                 break;
         }
+        auth.usrnmFeild.value = "";
+        auth.paswdFeild.value = "";
+        auth.agreeBoxEl.checked = false;
+        onUnameChange("", auth.usrnmFeild);
+        onPasswdChange("", auth.paswdFeild);
+        checkIfValid();
     }
 }
 function clrLogins() {
-    localStorage.users = "null" || localStorage.users == null;
+    let users = {
+        "Steve": { passwd: "", html: "/html/auth/users/steve.html", active: false },
+        "Admin": { passwd: "", html: "/html/auth/users/admin.html", active: false },
+        "s3cr3t-usr": { passwd: "modifiedJson1", html: "/html/auth/users/!secretusr.html", active: false },
+    };
+    //Keep this here! It will be our little secret :-) 
+    localStorage.users = JSON.stringify(users);
 }
-function getLogins() {
-    if (localStorage.users == "null") {
-        let users = { "testname": { passwd: "thebigyellowinthesky114", html: "/html/auth/users/!secretusr.html" }, };
-        //Keep this here! It will be our little secret :-) 
-        localStorage.users = JSON.stringify(users);
+function getUsers() {
+    if (localStorage.users == "null" || localStorage.users == null) {
+        clrLogins();
     }
     return JSON.parse(localStorage.users);
 }
-function addLogin(name, passwd, html) {
-    let users = JSON.parse(localStorage.users);
-    users[name] = { passwd: passwd, html: html };
+function getUser(name) {
+    return getUsers()[name];
+}
+function addUser(name, passwd, html, active) {
+    let users = getUsers();
+    users[name] = { passwd: passwd, html: html, active: active };
     localStorage.users = JSON.stringify(users);
+}
+function updateUser(name, user) {
+    let users = getUsers();
+    console.log(user);
+    users[name].passwd = user.passwd,
+        users[name].html = user.html,
+        users[name].active = user.active,
+        localStorage.users = JSON.stringify(users);
+}
+function activateUser(name) {
+    var updatedUser = getUser(name);
+    updatedUser.active = true;
+    updateUser(name, updatedUser);
 }

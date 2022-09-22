@@ -3,11 +3,11 @@
 const rootElement = document.getElementById("spa-root");
 const routerLoggingPrefix = "[SPA-Router]: 👉️ ";
 const routes = {
-    "#/":                { title: "UnSite - Welcome!",       html: "/html/auth/auth.html",         },
-    "#/signin/":         { title: "UnSite - Welcome!",       html: "/html/auth/signin.html",       },
-    "#/signup/":         { title: "UnSite - Welcome!",       html: "/html/auth/signup.html",       },
-    "#/verification/":   { title: "UnSite - Verification",   html: "/html/tasks/!first.html",      },
-    "#/mypage/":         { title: "UnSite - Home",           html: "/html/auth/users/!mypage.html",},
+    "#/":                { title: "UnSite - Welcome!",       html: "/html/auth/auth.html",              },
+    "#/signin/":         { title: "UnSite - Welcome!",       html: "/html/auth/signin.html",            },
+    "#/signup/":         { title: "UnSite - Welcome!",       html: "/html/auth/signup.html",            },
+    "#/verification/":   { title: "UnSite - Verification",   html: "/html/tasks/!first.html",           },
+    "#/mypage/":         { title: "UnSite - Home",           html: "/html/error/invalid-session.html",  },
 };
 
 

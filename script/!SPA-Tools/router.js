@@ -6,7 +6,7 @@ const routes = {
     "#/signin/": { title: "UnSite - Welcome!", html: "/html/auth/signin.html", },
     "#/signup/": { title: "UnSite - Welcome!", html: "/html/auth/signup.html", },
     "#/verification/": { title: "UnSite - Verification", html: "/html/tasks/!first.html", },
-    "#/mypage/": { title: "UnSite - Home", html: "/html/auth/users/!mypage.html", },
+    "#/mypage/": { title: "UnSite - Home", html: "/html/error/invalid-session.html", },
 };
 let routeActive = { key: "#/", value: "#" };
 let ignoreNextCall = 0;
