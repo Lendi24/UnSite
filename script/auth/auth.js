@@ -111,8 +111,10 @@ function sendToValidate(val) {
                             auth.committedUsername = auth.currentUsername;
                             requestPage(users[auth.currentUsername].html).then(function (value) {
                                 applyPage(value);
-                                let jsObj = new PageUser("pge");
-                                jsObj.initPage();
+                                /*
+                                currentJsObj = new PageUser("user-page")
+                                currentJsObj.initPage();*/
+                                new PageUser("user-page").initPage();
                             });
                             return;
                         }

@@ -7,11 +7,11 @@ class PageUser extends CobraGame {
         switch (auth.committedUsername) {
             case "Admin":
                 document.getElementById("nav-settings").classList.remove("is-hidden");
-                obj.taskLogic();
+                obj.initLogic();
                 break;
 
             case "Steve":
-                obj.taskLogic();
+                obj.initLogic();
                 break;
         
             default:

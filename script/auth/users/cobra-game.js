@@ -5,8 +5,8 @@ class CobraGame extends TaskObj {
     pixelGapSize = 1;
     pixelsInY = Math.floor(this.canvas.height / this.pixelSize) - 1;
     pixelsInX = Math.floor(this.canvas.width / this.pixelSize) - 1;
-    taskLogic() {
-        let obj = this;
+    taskLogic(obj) {
+        console.log(obj);
         let timeBetweenTicks = 100;
         let snake = [{ x: 0, y: 2 }, { x: 1, y: 2 }, { x: 2, y: 2 },];
         let fruit = [];
@@ -16,7 +16,7 @@ class CobraGame extends TaskObj {
         let collectedFruits = 0;
         let score = 0;
         //clearPixel(0,0);
-        document.addEventListener("keydown", (e) => {
+        document.getElementById("spa-root").addEventListener("keydown", (e) => {
             e.preventDefault();
             switch (e.key) {
                 case "w":
@@ -43,12 +43,12 @@ class CobraGame extends TaskObj {
                     break;
             }
         });
-        startGame();
-        function startGame() {
+        startGame(this);
+        function startGame(obj) {
             for (let y = 0; y <= obj.pixelsInY; y++) {
                 for (let x = 0; x <= obj.pixelsInX; x++) {
                     setTimeout(function () {
-                        obj.clearPixel(x, y);
+                        obj.clearPixel(x, y, obj);
                     }, 500 + (y + x) * 15);
                 }
             }
@@ -60,30 +60,32 @@ class CobraGame extends TaskObj {
             collectedFruits = 0;
             score = 0;
             setTimeout(function () {
-                timmer = setInterval(mainUpdate, timeBetweenTicks);
+                timmer = setInterval(function () { mainUpdate(obj); }, timeBetweenTicks);
             }, 500 + (obj.pixelsInY + obj.pixelsInX) * 15);
         }
-        function endGame(message) {
+        function endGame(message, obj) {
             clearInterval(timmer);
             for (let y = 0; y <= obj.pixelsInY; y++) {
                 for (let x = 0; x <= obj.pixelsInX; x++) {
                     setTimeout(function () {
-                        obj.placePixel(x, y);
+                        obj.placePixel(x, y, obj);
                     }, 250 + (y + x) * 15);
                 }
             }
-            setTimeout(function () {
-                //new CobraGame("yo").taskLogic();
-                startGame();
-            }, (obj.pixelsInY + obj.pixelsInX) * 15);
+            if (obj.running) {
+                setTimeout(function () {
+                    //new CobraGame("yo").taskLogic();
+                    startGame(obj);
+                }, (obj.pixelsInY + obj.pixelsInX) * 15);
+            }
             console.log(message);
         }
-        function mainUpdate() {
+        function mainUpdate(obj) {
             //ControlsLogic 
             movingDirOld = movingDir;
             //SnakeMove - Removing last block
             if (collectedFruits <= 0) {
-                obj.clearPixel(snake[0].x, snake[0].y);
+                obj.clearPixel(snake[0].x, snake[0].y, obj);
                 snake.shift();
             }
             else {
@@ -100,13 +102,13 @@ class CobraGame extends TaskObj {
                 y: snake[snake.length - 1].y + movingDir.y,
             };
             snake.push(newHead);
-            if (!obj.placePixel(newHead.x, newHead.y)) { //Returns false if pixel is outside play-area => end game 
-                endGame("Outside play-area");
+            if (!obj.placePixel(newHead.x, newHead.y, obj)) { //Returns false if pixel is outside play-area => end game 
+                endGame("Outside play-area", obj);
             }
             //SnakeLogic - Checking if snake is on itself, ending game
             for (let i = 0; i < snake.length - 1; i++) {
                 if (newHead.x == snake[i].x && newHead.y == snake[i].y) {
-                    endGame("Collided with tail");
+                    endGame("Collided with tail", obj);
                 }
             }
             //SnakeLogic - Checking if snake head is on fruid, awarding points
@@ -137,31 +139,31 @@ class CobraGame extends TaskObj {
                     });
                 } while (invalidPos && tried < snake.length + 10);
                 fruit.push(newFruit);
-                obj.placePixel(newFruit.x, newFruit.y);
+                obj.placePixel(newFruit.x, newFruit.y, obj);
                 console.log(newFruit.x + ":" + newFruit.y);
-                if (!obj.placePixel(newFruit.x, newFruit.y)) {
+                if (!obj.placePixel(newFruit.x, newFruit.y, obj)) {
                     window.alert("ERROR");
                 }
             }
         }
     }
-    clearPixel(x, y) {
-        x *= this.pixelSize;
-        y *= this.pixelSize;
-        this.ctx.clearRect(x, y, this.pixelSize, this.pixelSize);
+    clearPixel(x, y, obj) {
+        x *= obj.pixelSize;
+        y *= obj.pixelSize;
+        obj.ctx.clearRect(x, y, obj.pixelSize, obj.pixelSize);
     }
-    placePixel(x, y) {
-        if (x >= 0 && y >= 0 && x <= this.pixelsInX && y <= this.pixelsInY) {
-            x *= this.pixelSize;
-            y *= this.pixelSize;
-            this.ctx.beginPath();
-            this.ctx.moveTo(x + this.pixelGapSize, y + this.pixelGapSize);
-            this.ctx.lineTo(x + this.pixelSize - this.pixelGapSize, y + this.pixelGapSize);
-            this.ctx.lineTo(x + this.pixelSize - this.pixelGapSize, y + this.pixelSize - this.pixelGapSize);
-            this.ctx.lineTo(x + this.pixelGapSize, y + this.pixelSize - this.pixelGapSize);
-            this.ctx.lineTo(x + this.pixelGapSize, y + this.pixelGapSize);
-            this.ctx.fillStyle = "rgb(" + x + ", 100, " + y + ")";
-            this.ctx.fill();
+    placePixel(x, y, obj) {
+        if (x >= 0 && y >= 0 && x <= obj.pixelsInX && y <= obj.pixelsInY) {
+            x *= obj.pixelSize;
+            y *= obj.pixelSize;
+            obj.ctx.beginPath();
+            obj.ctx.moveTo(x + obj.pixelGapSize, y + obj.pixelGapSize);
+            obj.ctx.lineTo(x + obj.pixelSize - obj.pixelGapSize, y + obj.pixelGapSize);
+            obj.ctx.lineTo(x + obj.pixelSize - obj.pixelGapSize, y + obj.pixelSize - obj.pixelGapSize);
+            obj.ctx.lineTo(x + obj.pixelGapSize, y + obj.pixelSize - obj.pixelGapSize);
+            obj.ctx.lineTo(x + obj.pixelGapSize, y + obj.pixelGapSize);
+            obj.ctx.fillStyle = "rgb(" + x + ", 100, " + y + ")";
+            obj.ctx.fill();
             return true;
         }
         else {
