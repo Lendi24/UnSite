@@ -108,10 +108,13 @@ function sendToValidate(val) {
                         if (users[auth.currentUsername].passwd == auth.currentPassword) {
                             ignoreNextCall = 1;
                             window.location.href = "/#/mypage";
+                            auth.committedUsername = auth.currentUsername;
                             requestPage(users[auth.currentUsername].html).then(function (value) {
                                 applyPage(value);
-                                let jsObj = new CobraGame("cobra-game");
-                                jsObj.taskLogic();
+                                /*
+                                currentJsObj = new PageUser("user-page")
+                                currentJsObj.initPage();*/
+                                new PageUser("user-page").initPage();
                             });
                             return;
                         }

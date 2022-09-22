@@ -38,7 +38,7 @@ function loadTask(taskNr) {
             loadTask(++taskNr);
         };     
 
-        currentTaskJS.taskLogic();
+        currentTaskJS.initLogic();
     });
 }
 

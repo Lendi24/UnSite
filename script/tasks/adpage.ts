@@ -3,8 +3,7 @@ class TaskAdPage extends TaskObj {
     images: string[];
     zIndexTop: number;
 
-    taskLogic() {
-        const obj = this;
+    taskLogic(obj) {
         const imageRootFolder = "/assets/img/tasks/adpage/"
         let firstRun = true;
         obj.zIndexTop = 0;

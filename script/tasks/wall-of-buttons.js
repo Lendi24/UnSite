@@ -1,5 +1,5 @@
 class TaskWallOfButtons extends TaskObj {
-    taskLogic() {
+    taskLogic(obj) {
         let amountOfButtons = 30;
         let indexOfCorrectbutton = Math.floor(Math.random() * amountOfButtons);
         const buttonContain = document.getElementById("buttons");
