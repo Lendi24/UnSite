@@ -15,7 +15,7 @@ class CobraGame extends TaskObj {
         let movingDir = { x: 1, y: 0 };
         let collectedFruits = 0;
         //clearPixel(0,0);
-        document.getElementById("spa-root").addEventListener("keydown", (e) => {
+        function onKeyDown(e) {
             e.preventDefault();
             switch (e.key) {
                 case "w":
@@ -41,7 +41,8 @@ class CobraGame extends TaskObj {
                 default:
                     break;
             }
-        });
+        }
+        document.getElementById("spa-root").addEventListener("keydown", onKeyDown);
         startGame(this);
         function startGame(obj) {
             obj.scoreChanged(0);
@@ -52,7 +53,7 @@ class CobraGame extends TaskObj {
                     }, 500 + (y + x) * 15);
                 }
             }
-            timeBetweenTicks = 100;
+            timeBetweenTicks = 150;
             snake = [{ x: 0, y: 2 }, { x: 1, y: 2 }, { x: 2, y: 2 },];
             fruit = [];
             movingDirOld = { x: 1, y: 0 };
@@ -77,6 +78,9 @@ class CobraGame extends TaskObj {
                     //new CobraGame("yo").taskLogic();
                     startGame(obj);
                 }, (obj.pixelsInY + obj.pixelsInX) * 15);
+            }
+            else {
+                document.getElementById("spa-root").removeEventListener("keydown", onKeyDown);
             }
             console.log(message);
         }
