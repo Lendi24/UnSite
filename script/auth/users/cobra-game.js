@@ -110,7 +110,7 @@ class CobraGame extends TaskObj {
                     endGame("Collided with tail");
                 }
             }
-            //SnakeLogic - Checking if snake is on fruid, awarding points
+            //SnakeLogic - Checking if snake head is on fruid, awarding points
             for (let i = 0; i < fruit.length; i++) {
                 if (newHead.x == fruit[i].x && newHead.y == fruit[i].y) {
                     collectedFruits++;
