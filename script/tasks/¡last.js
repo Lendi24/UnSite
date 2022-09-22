@@ -7,11 +7,19 @@ class TasksAreDone extends TaskObj {
         const letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
         return (letters[Math.floor(Math.random() * letters.length)]);
     }
+    localUpdate(user, passwd, location) {
+        activateUser(user);
+        let userObj = getUser(user);
+        userObj.passwd = passwd;
+        updateUser(user, userObj);
+        window.location.hash = location;
+    }
     taskLogic() {
         let maintitle = document.getElementById("maintitle");
         let subtitle = document.getElementById("subtitle");
         let mainButton = document.getElementById("main-btn");
         let secdButton = document.getElementById("secd-btn");
+        let obj = this;
         switch (auth.committedUsername) {
             case "Admin":
                 let randomPassAdmin = (Math.floor(Math.random() * 999)).toString();
@@ -31,11 +39,9 @@ class TasksAreDone extends TaskObj {
                 "In return, I wanted to be left alone!\n\n" +
                     "";
                 mainButton.innerText = "I will not bother UnSite's verification-page ever again";
-                mainButton.href = "/#/signin/";
                 mainButton.onclick = function () {
-                    alert("**UnSiteAccount**\nUsername: 'Steve',\nPassword: '" + randomPassAdmin + "',");
-                    activateUser("Admin");
-                    updateUser("Admin", getUser("Admin").passwd = randomPassAdmin);
+                    alert("**UnSiteAccount**\nUsername: 'Admin',\nPassword: '" + randomPassAdmin + "',");
+                    obj.localUpdate("Admin", randomPassAdmin, "#/signin/");
                 };
                 break;
             case "Steve":
@@ -49,11 +55,9 @@ class TasksAreDone extends TaskObj {
                     "If you press the button below, you will get access to some random presons account" +
                     "\nWill you leave me alone now?";
                 mainButton.innerText = "I suck";
-                mainButton.href = "/#/signin/";
                 mainButton.onclick = function () {
                     alert("**UnSiteAccount**\nUsername: 'Steve',\nPassword: '" + randomPassSteve + "',");
-                    activateUser("Steve");
-                    updateUser("Steve", getUser("Steve").passwd = randomPassSteve);
+                    obj.localUpdate("Steve", randomPassSteve, "#/signin/");
                 };
                 break;
             case "": //No username. User used terminal or, most likely, skiped signup by going straight to verification
@@ -71,12 +75,19 @@ class TasksAreDone extends TaskObj {
                 subtitle.innerText = "Please login with your credentials\n" +
                     "Hope you didn't forget your password!";
                 mainButton.innerText = "Take me to 'login' and activate my account";
+                /*
                 mainButton.href = "/#/signin/";
-                mainButton.onclick = function () { activateUser(auth.committedUsername); };
+                mainButton.onclick = function() {activateUser(auth.committedUsername)};
                 secdButton.classList.remove("is-hidden");
-                secdButton.innerText = "I don't remember my password";
-                secdButton.onclick = function () { alert("**UnSiteAccount**\nUsername: '" + auth.committedUsername + "',\nPassword: '" + "dw" + "',"); };
-                console.log("re");
+                secdButton.innerText = "I don't remember my password"
+                secdButton.onclick = function() {alert("**UnSiteAccount**\nUsername: '"+auth.committedUsername+"',\nPassword: '"+"dw"+"',")}
+                */
+                mainButton.onclick = function () {
+                    const uName = auth.committedUsername;
+                    const pWord = getUser(auth.committedUsername).passwd;
+                    alert("**UnSiteAccount**\nUsername: '" + uName + "',\nPassword: '" + pWord + "',");
+                    obj.localUpdate(uName, pWord, "#/signin/");
+                };
                 break;
         }
     }
