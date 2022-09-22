@@ -13,7 +13,7 @@ const tasks = [
     { html: "/html/tasks/next-button.html",      js: new TaskNextButton("next-button-task")             },
 
 
-    { html: "/html/tasks/temp6.html",           js: new TaskObj("null") },
+   // { html: "/html/tasks/temp6.html",           js: new TaskObj("null") },
     { html: "/html/tasks/trollbutton.html",     js: new TaskTrollButton("troll-button") },
 /*
 

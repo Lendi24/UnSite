@@ -9,7 +9,7 @@ const tasks = [
     { html: "/html/tasks/not-a-robot.html", js: new TaskNotARobot("not-a-robot") },
     { html: "/html/tasks/wall-of-buttons.html", js: new TaskWallOfButtons("wall-of-buttons") },
     { html: "/html/tasks/next-button.html", js: new TaskNextButton("next-button-task") },
-    { html: "/html/tasks/temp6.html", js: new TaskObj("null") },
+    // { html: "/html/tasks/temp6.html",           js: new TaskObj("null") },
     { html: "/html/tasks/trollbutton.html", js: new TaskTrollButton("troll-button") },
     /*
     
