@@ -6,7 +6,6 @@ class CobraGame extends TaskObj {
     pixelsInY = Math.floor(this.canvas.height / this.pixelSize) - 1;
     pixelsInX = Math.floor(this.canvas.width / this.pixelSize) - 1;
     taskLogic(obj) {
-        console.log(obj);
         let timeBetweenTicks = 100;
         let snake = [{ x: 0, y: 2 }, { x: 1, y: 2 }, { x: 2, y: 2 },];
         let fruit = [];
@@ -116,8 +115,6 @@ class CobraGame extends TaskObj {
                 if (newHead.x == fruit[i].x && newHead.y == fruit[i].y) {
                     collectedFruits++;
                     fruit.splice(i, 1);
-                    console.log(fruit);
-                    console.log(i);
                     //endGame("Collided with fruit lol");
                 }
             }
@@ -140,7 +137,6 @@ class CobraGame extends TaskObj {
                 } while (invalidPos && tried < snake.length + 10);
                 fruit.push(newFruit);
                 obj.placePixel(newFruit.x, newFruit.y, obj);
-                console.log(newFruit.x + ":" + newFruit.y);
                 if (!obj.placePixel(newFruit.x, newFruit.y, obj)) {
                     window.alert("ERROR");
                 }

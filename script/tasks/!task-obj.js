@@ -10,10 +10,8 @@ class TaskObj {
         let obj = this;
         function clearLogic() {
             console.log("cleared");
-            console.log(obj);
             window.removeEventListener('hashchange', clearLogic);
             obj.running = false;
-            console.log(obj);
             obj = null;
         }
         window.addEventListener('hashchange', clearLogic);
