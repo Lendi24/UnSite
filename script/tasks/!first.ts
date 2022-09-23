@@ -15,7 +15,7 @@ const tasks = [
 
 
 
-    { html: "/html/tasks/temp6.html",           js: new TaskObj("null") },
+   // { html: "/html/tasks/temp6.html",           js: new TaskObj("null") },
     { html: "/html/tasks/trollbutton.html",     js: new TaskTrollButton("troll-button") },
 /*
 
@@ -40,7 +40,7 @@ function loadTask(taskNr) {
             loadTask(++taskNr);
         };     
 
-        currentTaskJS.taskLogic();
+        currentTaskJS.initLogic();
     });
 }
 

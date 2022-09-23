@@ -108,10 +108,13 @@ function sendToValidate(val) {
                         if (users[auth.currentUsername].passwd == auth.currentPassword) {
                             ignoreNextCall = 1;
                             window.location.href = "/#/mypage";
+                            auth.committedUsername = auth.currentUsername;
                             requestPage(users[auth.currentUsername].html).then(function (value) {
                                 applyPage(value);
-                                let jsObj = new CobraGame("cobra-game");
-                                jsObj.taskLogic();
+                                /*
+                                currentJsObj = new PageUser("user-page")
+                                currentJsObj.initPage();*/
+                                new PageUser("user-page").initPage();
                             });
                             return;
                         }
@@ -138,8 +141,8 @@ function sendToValidate(val) {
 }
 function clrLogins() {
     let users = {
-        "Steve": { passwd: "", html: "/html/auth/users/steve.html", active: false },
-        "Admin": { passwd: "", html: "/html/auth/users/admin.html", active: false },
+        "Steve": { passwd: "", html: "/html/auth/users/user.html", active: false },
+        "Admin": { passwd: "", html: "/html/auth/users/user.html", active: false },
         "s3cr3t-usr": { passwd: "modifiedJson1", html: "/html/auth/users/!secretusr.html", active: false },
     };
     //Keep this here! It will be our little secret :-) 

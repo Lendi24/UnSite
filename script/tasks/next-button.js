@@ -1,5 +1,5 @@
 class TaskNextButton extends TaskObj {
-    taskLogic() {
+    taskLogic(obj) {
         document.getElementById("next").onclick = function () {
             const bar = document.getElementById("bar");
             const con = document.getElementById("button-contain");
