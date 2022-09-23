@@ -1,57 +1,39 @@
-<html lang="en">
+<div class="container hero is-fullheight column is-one-fifth is-justify-content-center has-text-centered">
+    <div class="hero box is-primary">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/tools/bulma.css">
-    <script defer src="/script/tasks/review-page.js"></script>
-    <title>Document</title>
-</head>
+        <h1 class="title mt-5">Please rate yourself</h1>
+        <h2 class="subtitle mt-2">Self Estimate and Conficance Reducing Verification Exercise</h2>
 
-<body>
-    <div class="container hero is-fullheight column is-one-fifth is-justify-content-center has-text-centered">
-        <div class="hero box is-primary">
+        <div class="field mb-auto container">
+            <div class="meow">
+                <p class="title is-6 mb-auto m-4">IQ Level</p>
+                <input class="slider is-fullwidth" id="IQ" step="1" min="0" max="100" value="100" type="range">
+            </div>
 
-            <h1 class="title mt-5">Please rate yourself</h1>
-            <h2 class="subtitle mt-2">Self Estimate and Conficance Reducing Verification Exercise</h2>
+            <div>
+                <p class="title is-6 mb-auto m-4">Brain Capacity</p>
+                <input class="slider is-fullwidth" id="brain" step="1" min="0" max="100" value="100" type="range">
+            </div>
 
-                <div class="field mb-auto container">
-                    <div class="meow">
-                        <p class="title is-6 mb-auto m-4" >IQ Level</p>
-                        <input class="slider is-fullwidth" id="IQ" step="1" min="0" max="100" value="100" type="range">
-                    </div>
+            <div>
+                <p class="title is-6 mb-auto m-4">Strenght</p>
+                <input class="slider is-fullwidth" id="strenght" step="1" min="0" max="100" value="100" type="range">
+            </div>
 
-                    <div>
-                        <p class="title is-6 mb-auto m-4" >Brain Capacity</p>
-                        <input class="slider is-fullwidth" id="brain" step="1" min="0" max="100" value="100" type="range">
-                    </div>
+            <div>
+                <p class="title is-6 mb-auto m-4">Height</p>
+                <input class="slider is-fullwidth" id="height" step="1" min="0" max="100" value="100" type="range">
+            </div>
 
-                    <div>
-                        <p class="title is-6 mb-auto m-4" >Strenght</p>
-                        <input class="slider is-fullwidth" id="strenght" step="1" min="0" max="100" value="100" type="range">
-                    </div>
+            <div>
+                <p class="title is-6 mb-auto m-4">Smelliness</p>
+                <input class="slider is-fullwidth" id="smell" step="1" min="0" max="100" value="100" type="range">
+            </div>
 
-                    <div>
-                        <p class="title is-6 mb-auto m-4" >Height</p>
-                        <input class="slider is-fullwidth" id="height" step="1" min="0" max="100" value="100" type="range">
-                    </div>
+            <div>
+                <p class="title is-6 mb-auto m-4">Successfullness</p>
+                <input class="slider is-fullwidth" id="success" step="1" min="0" max="100" value="100" type="range">
+            </div>
 
-                    <div>
-                        <p class="title is-6 mb-auto m-4" >Smelliness</p>
-                        <input class="slider is-fullwidth" id="smell" step="1" min="0" max="100" value="100" type="range">
-                    </div>
-
-                    <div>
-                        <p class="title is-6 mb-auto m-4" >Successfullness</p>
-                        <input class="slider is-fullwidth" id="success" step="1" min="0" max="100" value="100" type="range">
-                    </div>
-
-                    <button disabled class="button is-danger mt-5 is-light" id="next-task-button">Submit</button>
-                </div>
-
-
-
-</body>
-
-</html>
+            <button disabled class="button is-danger mt-5 is-light" id="next-task-button">Submit</button>
+        </div>
