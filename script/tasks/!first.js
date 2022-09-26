@@ -5,7 +5,7 @@ const endingScreen = {
 const tasks = [
     { html: "/html/tasks/adpage.html", js: new TaskAdPage("ad-page") },
     { html: "/html/tasks/email.html", js: new TaskEmailVerify("email-verify") },
-    { html: "/html/tasks/Tos.html", js: new TaskObj("terms-of-service") },
+    { html: "/html/tasks/ToS.html", js: new TaskObj("terms-of-service") },
     { html: "/html/tasks/not-a-robot.html", js: new TaskNotARobot("not-a-robot") },
     { html: "/html/tasks/wall-of-buttons.html", js: new TaskWallOfButtons("wall-of-buttons") },
     { html: "/html/tasks/next-button.html", js: new TaskNextButton("next-button-task") },
