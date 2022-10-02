@@ -1,5 +1,5 @@
 class TaskAdPage extends TaskObj { 
-    name: string;
+    //name: string;
     images: string[];
     zIndexTop: number;
 
@@ -28,7 +28,7 @@ class TaskAdPage extends TaskObj {
             if (firstRun) {
                 firstRun = false;
 //40
-                for (let i = 0; i < 40; i++) {
+                for (let i = 0; i < 20; i++) {
                     setTimeout(() => {   
                         obj.newWindow(
                             container,

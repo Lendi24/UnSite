@@ -123,6 +123,7 @@ function sendToValidate(val) {
                 }
                 
                 else {
+                    updateTaskList();
                     auth.committedUsername = auth.currentUsername;
                     addUser(auth.currentUsername, auth.currentPassword, "/html/auth/users/user.html", false);
                     window.location.href = "/#/verification";

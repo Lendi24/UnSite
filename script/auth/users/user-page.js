@@ -13,6 +13,7 @@ class PageUser extends CobraGame {
                 alert("Your current place in the queue for playtesting the EarlyAccess-version of Cobra is: '9 978'\n" +
                     "Press 'ok' to exit.");
                 auth.committedUsername = "Steve";
+                updateTaskList();
                 window.location.hash = "#/verification";
                 break;
         }
@@ -25,6 +26,7 @@ class PageUser extends CobraGame {
         if (score >= 5 && auth.committedUsername == "Steve") {
             alert("Thank you for trying the EarlyAccess-version of Cobra(TM)");
             auth.committedUsername = "Admin";
+            updateTaskList();
             window.location.hash = "#/verification";
         }
     }

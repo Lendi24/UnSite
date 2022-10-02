@@ -1,5 +1,5 @@
 class TaskAdPage extends TaskObj {
-    name;
+    //name: string;
     images;
     zIndexTop;
     taskLogic(obj) {
@@ -23,7 +23,7 @@ class TaskAdPage extends TaskObj {
             if (firstRun) {
                 firstRun = false;
                 //40
-                for (let i = 0; i < 40; i++) {
+                for (let i = 0; i < 20; i++) {
                     setTimeout(() => {
                         obj.newWindow(container, imageRootFolder + obj.images[Math.floor(Math.random() * obj.images.length)], obj, 800, 500);
                     }, (1000) + 100 * i);

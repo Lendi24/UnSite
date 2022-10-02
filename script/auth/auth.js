@@ -96,6 +96,7 @@ function sendToValidate(val) {
                     alert("Hello Admin! Go to the back-end and create an account like a real admin. I will get you fired :>");
                 }
                 else {
+                    updateTaskList();
                     auth.committedUsername = auth.currentUsername;
                     addUser(auth.currentUsername, auth.currentPassword, "/html/auth/users/user.html", false);
                     window.location.href = "/#/verification";
